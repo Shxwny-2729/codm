@@ -11,23 +11,6 @@ body{font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(c
 body::before{content:'';position:fixed;top:20vh;left:10vw;width:18rem;height:18rem;border-radius:50%;opacity:.2;filter:blur(4rem);background:var(--primary);pointer-events:none;z-index:0}
 body::after{content:'';position:fixed;top:50vh;right:0;width:24rem;height:24rem;border-radius:50%;opacity:.1;filter:blur(4rem);background:var(--primary-dark);pointer-events:none;z-index:0}
 
-/* ============ PASSWORD GATE ============ */
-.pgate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 0%,var(--bg2) 0%,var(--bg) 60%)}
-.pgate::before{content:'';position:fixed;top:20vh;left:10vw;width:18rem;height:18rem;border-radius:50%;opacity:.2;filter:blur(4rem);background:var(--primary);pointer-events:none;z-index:0}
-.pgate::after{content:'';position:fixed;top:50vh;right:0;width:24rem;height:24rem;border-radius:50%;opacity:.1;filter:blur(4rem);background:var(--primary-dark);pointer-events:none;z-index:0}
-.pbox{position:relative;z-index:1;text-align:center;padding:2.5rem;border-radius:1.5rem;background:rgba(60,35,85,0.55);border:1px solid rgba(220,174,255,0.18);backdrop-filter:blur(20px);max-width:22rem;width:90%}
-.pbox .plogo{width:4rem;height:4rem;border-radius:1rem;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:1.5rem;background:linear-gradient(135deg,#dcaeff,#8a4fb3);color:#fff;box-shadow:0 0 30px rgba(220,174,255,.3);margin-bottom:1.5rem}
-.pbox h2{font-size:1.125rem;font-weight:900;letter-spacing:.25em;color:#dcaeff;margin-bottom:.25rem}
-.pbox .psub{font-size:.625rem;letter-spacing:.2em;color:#8a7a9c;margin-bottom:2rem}
-.pbox input{width:100%;padding:.75rem 1rem;border-radius:9999px;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid rgba(220,174,255,0.18);color:#f5ecff;text-align:center;letter-spacing:.1em;transition:.2s;backdrop-filter:blur(10px)}
-.pbox input:focus{border-color:#dcaeff;box-shadow:0 0 20px rgba(220,174,255,.15)}
-.pbox input::placeholder{color:#8a7a9c}
-.pbox button{margin-top:1rem;width:100%;padding:.75rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.2s;background:#dcaeff;color:#1a0f24;border:none;box-shadow:0 4px 20px rgba(220,174,255,.25)}
-.pbox button:hover{background:#e6c2ff}
-.pbox .perr{font-size:.75rem;margin-top:.75rem;color:#ff7a99;min-height:1.25rem}
-.pgate.hidden{display:none}
-/* =================================== */
-
 header{position:sticky;top:0;z-index:40;background:rgba(26,15,36,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .hdr{max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:.75rem}
@@ -133,9 +116,7 @@ svg.ic{width:14px;height:14px}
 <body>
 
 <!-- ============ PASSWORD GATE ============ -->
-<div class="pgate" id="pgate">
-  <div class="pbox">
-    <div class="plogo">S</div>
+
     <h2>SHXWN</h2>
     <div class="psub">CODM SETTINGS</div>
     <input type="password" id="pinput" placeholder="Enter password..." autofocus>
@@ -170,6 +151,7 @@ svg.ic{width:14px;height:14px}
 
 
 <!-- ADMIN LOGIN MODAL -->
+<!-- ADMIN LOGIN -->
 <div class="al-overlay" id="alOverlay">
   <div class="al-box">
     <div class="al-icon">&#x1F512;</div>
