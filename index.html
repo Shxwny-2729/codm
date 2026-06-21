@@ -115,43 +115,7 @@ svg.ic{width:14px;height:14px}
 </head>
 <body>
 
-<!-- ============ PASSWORD GATE ============ -->
-
-    <h2>SHXWN</h2>
-    <div class="psub">CODM SETTINGS</div>
-    <input type="password" id="pinput" placeholder="Enter password..." autofocus>
-    <button id="pbtn">UNLOCK</button>
-    <div class="perr" id="perr"></div>
-  </div>
-</div>
-<script>
-(function(){
-  var PW='Herocoi992729**';
-  var g=document.getElementById('pgate');
-  var inp=document.getElementById('pinput');
-  var btn=document.getElementById('pbtn');
-  var err=document.getElementById('perr');
-  // Already logged in this session?
-  if(sessionStorage.getItem('_shxwn_auth')){g.classList.add('hidden');}
-  function unlock(){
-    if(inp.value===PW){
-      sessionStorage.setItem('_shxwn_auth','1');
-      g.classList.add('hidden');
-    }else{
-      err.textContent='Incorrect password';
-      inp.style.animation='shake .4s';
-      setTimeout(function(){inp.style.animation='';},400);
-    }
-  }
-  btn.addEventListener('click',unlock);
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
-})();
-</script>
-<!-- ====================================== -->
-
-
 <!-- ADMIN LOGIN MODAL -->
-<!-- ADMIN LOGIN -->
 <div class="al-overlay" id="alOverlay">
   <div class="al-box">
     <div class="al-icon">&#x1F512;</div>
@@ -164,7 +128,7 @@ svg.ic{width:14px;height:14px}
 </div>
 
 <header>
-<div class="hdr"><div class="logo"><div class="logo-i">S</div><div><div class="logo-t">SHXWN</div><div class="logo-s">CODM SETTINGS</div></div></div><div class="tabs"><button class="tb act" data-tab="home">Home</button><button class="tb" data-tab="loadouts">Loadouts</button><button class="tb admin-only" data-tab="manage" id="manageTab" style="display:none">Manage</button></div></div></header>
+<div class="hdr"><div class="logo"><div class="logo-i">S</div><div><div class="logo-t">SHXWN</div><div class="logo-s">CODM SETTINGS</div></div></div><div class="tabs"><button class="tb act" data-tab="home">Home</button><button class="tb" data-tab="loadouts">Loadouts</button><button class="tb" data-tab="manage" id="manageTab">Manage</button></div></div></header>
 <main>
 <div class="tc act" id="home-tab">
 <div class="hero"><h1>S H X W N</h1><p id="tagline"></p><div class="stats" id="stat-cards"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div><div class="st">SEND A GIFT</div><div class="ss">Support Shxwn</div></div></div><div class="sb" id="gift-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="st">FOLLOW ME</div><div class="ss">Social Media</div></div></div><div class="sb" id="social-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div><div><div class="st">SENSI &amp; HUD</div><div class="ss">Sensitivity &amp; HUD</div></div></div><div class="sb" id="sensi-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><div class="st">PERKS</div></div></div><div class="sb" id="perks-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="st">FIELD OF VIEW</div></div></div><div class="sb" id="fov-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div><div class="st">HOW TO USE</div></div></div><div class="sb" id="howto-sec"></div></div>
@@ -174,11 +138,11 @@ svg.ic{width:14px;height:14px}
 </div>
 
 <!-- ========== MANAGE TAB (admin only) ========== -->
-<div class="tc admin-only" id="manage-tab">
+<div class="tc" id="manage-tab">
 <h2 style="font-size:1.875rem;font-weight:900;letter-spacing:.1em;margin-bottom:.25rem;color:var(--primary)">MANAGE</h2>
 <p style="font-size:.75rem;margin-bottom:1.5rem;color:var(--muted)">Admin panel — edit all settings, perks, and loadouts</p>
 
-<div class="sec admin-only" style="border-color:rgba(220,174,255,0.4)">
+<div class="sec" style="border-color:rgba(220,174,255,0.4)">
 <div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div><div class="st">GENERAL SETTINGS</div></div></div>
 <div class="sb">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
@@ -212,7 +176,7 @@ svg.ic{width:14px;height:14px}
 </div>
 </div>
 
-<div class="sec admin-only" style="border-color:rgba(220,174,255,0.4)">
+<div class="sec" style="border-color:rgba(220,174,255,0.4)">
 <div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div><div class="st">ADD LOADOUT</div></div></div>
 <div class="sb">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
@@ -225,14 +189,14 @@ svg.ic{width:14px;height:14px}
 </div>
 </div>
 
-<div class="sec admin-only" style="border-color:rgba(220,174,255,0.4)">
+<div class="sec" style="border-color:rgba(220,174,255,0.4)">
 <div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div><div class="st">EDIT / DELETE LOADOUTS</div></div></div>
 <div class="sb" id="m-edit-list"></div>
 </div>
 </div>
 
 </main>
-<footer>SHXWN — CODM LOADOUTS &amp; SETTINGS &middot; &copy; 2026</footer>
+<footer>SHXWN — CODM LOADOUTS &amp; SETTINGS &middot; &copy; 2026<br><button onclick="logoutAdmin()" style="background:none;border:none;color:var(--subtle);cursor:pointer;font-size:.625rem;letter-spacing:.15em;margin-top:.5rem;display:none" id="logoutBtn">LOCK ADMIN</button></footer>
 <div class="toast" id="toast"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg"></span></div>
 <script>
 /* DATA - edit this to update your site */
@@ -263,15 +227,16 @@ var dev="phone",cat="All";
 var ADMIN_PW="Herocoi992729**";
 var isAdmin=false;
 (function(){
-  if(sessionStorage.getItem("_sxa")){isAdmin=true;document.querySelectorAll(".admin-only").forEach(function(e){e.classList.add("show")});document.getElementById("manageTab")&&(document.getElementById("manageTab").style.display="");document.getElementById("logoutBtn")&&(document.getElementById("logoutBtn").style.display="");}
+  if(sessionStorage.getItem("_sxa")){isAdmin=true;showAdmin()}
   document.getElementById("alBtn").addEventListener("click",function(){
-    if(document.getElementById("alInput").value===ADMIN_PW){sessionStorage.setItem("_sxa","1");isAdmin=true;document.querySelectorAll(".admin-only").forEach(function(e){e.classList.add("show")});document.getElementById("manageTab")&&(document.getElementById("manageTab").style.display="");document.getElementById("logoutBtn")&&(document.getElementById("logoutBtn").style.display="");document.getElementById("alOverlay").classList.remove("show");showManage();}else{document.getElementById("alErr").textContent="Wrong password";document.getElementById("alInput").style.animation="shake .4s";setTimeout(function(){document.getElementById("alInput").style.animation=""},400)}
+    if(document.getElementById("alInput").value===ADMIN_PW){sessionStorage.setItem("_sxa","1");isAdmin=true;document.getElementById("alOverlay").classList.remove("show");showAdmin()}else{document.getElementById("alErr").textContent="Wrong password";document.getElementById("alInput").style.animation="shake .4s";setTimeout(function(){document.getElementById("alInput").style.animation=""},400)}
   });
   document.getElementById("alInput").addEventListener("keydown",function(e){if(e.key==="Enter")document.getElementById("alBtn").click()});
-  document.addEventListener("keydown",function(e){if(e.ctrlKey&&e.shiftKey&&e.key==="M"){if(!isAdmin){document.getElementById("alOverlay").classList.add("show");document.getElementById("alInput").focus()}else{logoutAdmin()}}});
 })();
-function logoutAdmin(){sessionStorage.removeItem("_sxa");isAdmin=false;document.querySelectorAll(".admin-only").forEach(function(e){e.classList.remove("show")});document.getElementById("manageTab")&&(document.getElementById("manageTab").style.display="none");document.getElementById("logoutBtn")&&(document.getElementById("logoutBtn").style.display="none");var tabs=document.querySelectorAll(".tb");for(var i=0;i<tabs.length;i++){tabs[i].classList.remove("act")}tabs[0].classList.add("act");var tcs=document.querySelectorAll(".tc");for(i=0;i<tcs.length;i++){tcs[i].classList.remove("act")}document.getElementById("home-tab").classList.add("act");flash("Admin mode locked")}
-function showManage(){if(!isAdmin){document.getElementById("alOverlay").classList.add("show");document.getElementById("alInput").focus();return}document.querySelectorAll(".tb").forEach(function(t){t.classList.remove("act")});document.getElementById("manageTab").classList.add("act");document.querySelectorAll(".tc").forEach(function(t){t.classList.remove("act")});document.getElementById("manage-tab").classList.add("act");loadManageData()}
+function showAdmin(){document.querySelectorAll(".admin-only").forEach(function(e){e.classList.add("show")});document.getElementById("logoutBtn").style.display=""}
+function logoutAdmin(){sessionStorage.removeItem("_sxa");isAdmin=false;document.querySelectorAll(".admin-only").forEach(function(e){e.classList.remove("show")});document.getElementById("logoutBtn").style.display="none";switchTab("home");flash("Admin locked")}
+function showManage(){if(!isAdmin){document.getElementById("alOverlay").classList.add("show");document.getElementById("alInput").focus();return}switchTab("manage");loadManageData()}
+function switchTab(id){document.querySelectorAll(".tb").forEach(function(t){t.classList.remove("act")});document.querySelector("[data-tab="+id+"]").classList.add("act");document.querySelectorAll(".tc").forEach(function(t){t.classList.remove("act")});document.getElementById(id+"-tab").classList.add("act")}
 
 /* ====== MANAGE: Load form data ====== */
 function loadManageData(){
@@ -399,11 +364,7 @@ document.querySelectorAll(".tb").forEach(function(tb){
 });
 
 /* refresh home stats */
-function refreshHome(){
-  var favs=D.loadouts.filter(function(l){return l.favorite}).length;
-  document.getElementById("stat-cards").innerHTML='<div class="sc"><div class="n">'+D.loadouts.length+'</div><div class="l">LOADOUTS</div></div><div class="sc"><div class="n">'+favs+'</div><div class="l">FAVORITES</div></div><div class="sc"><div class="n">2</div><div class="l">SETTINGS</div></div>';
-  buildLoadouts();
-}
+function refreshHome(){renderAll()}
 </script>
 
 <script src="app.js"></script>
