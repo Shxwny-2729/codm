@@ -6,3 +6,686 @@
 <title>Shxwn — CODM Settings & Loadouts</title>
 <style>
 :root{--bg:#0a0f14;--bg2:#111820;--card:rgba(20,28,40,0.88);--card-hover:rgba(25,35,52,0.95);--border:rgba(0,229,255,0.12);--border-glow:rgba(0,229,255,0.28);--primary:#00e5ff;--primary-dark:#00b8d4;--primary-deep:#006064;--accent:#ff2d6e;--text:#e8edf5;--muted:#6c7a8d;--subtitle:#4a5568;--success:#00e676;--warning:#ffab00;--danger:#ff5252;--glass:rgba(0,229,255,0.04)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter','SF Pro Display',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.025) 1px,transparent 1px);background-size:48px 48px;z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 0%,rgba(0,229,255,0.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,45,110,0.04) 0%,transparent 40%);z-index:0;pointer-events:none}
+.scan-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.015) 2px,rgba(0,0,0,0.015) 4px);opacity:0.3}
+header{position:sticky;top:0;z-index:400;background:rgba(10,15,20,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.hdr{max-width:76rem;margin:0 auto;padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:0.75rem}
+.logo-i{width:2.8rem;height:2.8rem;border-radius:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;background:linear-gradient(135deg,var(--primary),var(--primary-deep));color:#000;box-shadow:0 0 28px rgba(0,229,255,0.35);position:relative}
+.logo-i::after{content:'';position:absolute;inset:-3px;border-radius:0.8rem;border:1px solid var(--border-glow);animation:pulseBorder 2s ease-in-out infinite}
+@keyframes pulseBorder{0%,100%{opacity:0.35;transform:scale(1)}50%{opacity:0.85;transform:scale(1.04)}}
+.logo-t{font-size:1.05rem;font-weight:800;letter-spacing:0.25em;color:var(--primary);text-shadow:0 0 20px rgba(0,229,255,0.3)}
+.logo-s{font-size:0.6rem;letter-spacing:0.2em;color:var(--subtitle)}
+.tabs{display:flex;gap:0.2rem;padding:0.2rem;border-radius:999px;background:rgba(0,229,255,0.05);border:1px solid var(--border)}
+.tb{padding:0.38rem 1.1rem;border-radius:999px;border:none;cursor:pointer;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.25s;background:transparent;color:var(--muted)}
+.tb.act{background:var(--primary);color:var(--bg);box-shadow:0 0 18px rgba(0,229,255,0.3)}
+.tb:hover:not(.act){color:var(--text);text-shadow:0 0 8px rgba(0,229,255,0.2)}
+main{max-width:76rem;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:10}
+.tc{display:none}.tc.act{display:block;animation:fadeSlide 0.35s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sec{border-radius:1rem;padding:1.5rem;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(16px);margin-bottom:1.5rem;transition:all 0.3s;position:relative;overflow:hidden}
+.sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-glow),transparent);opacity:0.5}
+.sec:hover{border-color:var(--border-glow);box-shadow:0 0 30px rgba(0,229,255,0.04)}
+.sh{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem}
+.si{width:2.25rem;height:2.25rem;border-radius:0.7rem;display:flex;align-items:center;justify-content:center;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);color:var(--primary);flex-shrink:0}
+.st{font-size:0.83rem;font-weight:800;letter-spacing:0.18em;color:var(--primary);text-transform:uppercase}
+.ss{font-size:0.7rem;color:var(--muted);margin-top:0.1rem}
+.sb{margin-top:1rem}
+.bo{padding:0.48rem 1.2rem;border-radius:999px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.25s;cursor:pointer;background:transparent;color:var(--primary);border:1px solid rgba(0,229,255,0.4);display:inline-flex;align-items:center;gap:0.35rem}
+.bo:hover{background:rgba(0,229,255,0.1);border-color:var(--primary);box-shadow:0 0 14px rgba(0,229,255,0.15)}
+.bo:disabled{opacity:0.35;cursor:not-allowed}
+.bf{padding:0.52rem 1.25rem;border-radius:999px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.25s;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#000;border:none;box-shadow:0 4px 20px rgba(0,229,255,0.25);display:inline-flex;align-items:center;gap:0.35rem}
+.bf:hover{transform:translateY(-1px);box-shadow:0 6px 26px rgba(0,229,255,0.35)}
+.bs{width:2.8rem;height:2.8rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;background:transparent;color:var(--primary);border:1px solid rgba(0,229,255,0.4);font-size:1.1rem}
+.bs:hover{background:rgba(0,229,255,0.1);transform:translateY(-2px)}
+.bs:disabled{opacity:0.35;cursor:not-allowed}
+.bs.danger{color:var(--danger);border-color:rgba(255,82,82,0.4)}
+.bs.danger:hover{background:rgba(255,82,82,0.1);border-color:var(--danger)}
+.hero{text-align:center;padding:2.5rem 0 1.5rem}
+.hero h1{font-size:clamp(2.8rem,8vw,4.5rem);font-weight:900;letter-spacing:0.4em;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--primary) 20%,var(--accent) 50%,var(--primary) 80%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
+.hero p{font-size:0.78rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:1.5rem;max-width:32rem;margin-left:auto;margin-right:auto}
+.sc{border-radius:1rem;padding:1rem;text-align:center;background:var(--card);border:1px solid var(--border);transition:all 0.25s}
+.sc:hover{transform:translateY(-3px);border-color:var(--border-glow)}
+.sc .n{font-size:1.8rem;font-weight:900;color:var(--primary);text-shadow:0 0 14px rgba(0,229,255,0.3)}
+.sc .l{font-size:0.58rem;letter-spacing:0.2em;margin-top:0.25rem;color:var(--subtitle);text-transform:uppercase}
+.lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1rem}
+.lc{border-radius:1rem;padding:1.2rem;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(16px);transition:all 0.3s;position:relative;overflow:hidden}
+.lc::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,229,255,0.025) 0%,transparent 70%);opacity:0;transition:opacity 0.3s}
+.lc:hover{transform:translateY(-3px);border-color:var(--border-glow)}
+.lc:hover::after{opacity:1}
+.lch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.7rem;position:relative;z-index:1}
+.lcat{font-size:0.54rem;font-weight:700;letter-spacing:0.2em;padding:0.14rem 0.5rem;border-radius:0.35rem;text-transform:uppercase;color:var(--primary);background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.16)}
+.lcat.legendary{color:#ffab00;background:rgba(255,171,0,0.08);border-color:rgba(255,171,0,0.2)}
+.lcat.mythic{color:#e040fb;background:rgba(224,64,251,0.08);border-color:rgba(224,64,251,0.2)}
+.lcat.epic{color:#7c4dff;background:rgba(124,77,255,0.08);border-color:rgba(124,77,255,0.2)}
+.limg{height:6.5rem;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;background:linear-gradient(135deg,rgba(0,229,255,0.04),rgba(0,229,255,0.01));border:1px solid rgba(0,229,255,0.07);overflow:hidden;position:relative;z-index:1}
+.limg img{width:100%;height:100%;object-fit:cover}
+.limg .lnopic{font-size:2.5rem;color:var(--primary);opacity:0.15}
+.ln{font-weight:900;font-size:1.05rem;letter-spacing:0.1em;color:var(--text);position:relative;z-index:1}
+.ld{font-size:0.68rem;margin:0.15rem 0 0.7rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.1em;position:relative;z-index:1}
+.la{font-size:0.58rem;line-height:1.5;margin-bottom:0.7rem;padding-bottom:0.7rem;border-bottom:1px dashed var(--border);color:var(--subtitle);position:relative;z-index:1}
+.la strong{color:var(--primary);letter-spacing:0.1em}
+.lcode{font-size:0.55rem;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--primary-dark);margin-bottom:0.5rem;word-break:break-all;opacity:0.8;position:relative;z-index:1}
+.lact{display:flex;gap:0.5rem;position:relative;z-index:1}
+.lfv{background:none;border:none;cursor:pointer;color:var(--subtitle);transition:all 0.15s;padding:0.2rem;font-size:0.85rem}
+.lfv:hover{transform:scale(1.2);color:var(--accent)}
+.lfv.faved{color:var(--accent)}
+.ls{position:relative;max-width:26rem;margin-bottom:1rem}
+.ls input{width:100%;padding:0.62rem 0.75rem 0.62rem 2.5rem;border-radius:999px;font-size:0.83rem;outline:none;background:var(--card);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(16px);transition:all 0.25s}
+.ls input:focus{border-color:var(--border-glow);box-shadow:0 0 16px rgba(0,229,255,0.1)}
+.ls input::placeholder{color:var(--subtitle)}
+.ls svg{position:absolute;left:0.95rem;top:50%;transform:translateY(-50%);color:var(--subtitle)}
+.fc{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{padding:0.22rem 0.85rem;border-radius:999px;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.25s;cursor:pointer;background:rgba(0,229,255,0.04);color:var(--muted);border:1px solid var(--border)}
+.chip.act{background:var(--primary);color:var(--bg);border-color:var(--primary);box-shadow:0 0 14px rgba(0,229,255,0.25)}
+.chip:hover:not(.act){border-color:var(--border-glow)}
+input,textarea,select{font-family:inherit}
+input:focus,textarea:focus,select:focus{border-color:var(--border-glow)!important;box-shadow:0 0 16px rgba(0,229,255,0.08)!important;outline:none}
+.fg-row{display:flex;gap:0.75rem}.fg-row>div{flex:1}
+.uz{border:2px dashed var(--border);border-radius:1rem;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.3s;background:rgba(0,229,255,0.02);position:relative}
+.uz:hover,.uz.drag{border-color:var(--primary);background:rgba(0,229,255,0.06);box-shadow:0 0 32px rgba(0,229,255,0.08)}
+.uz .uz-icon{font-size:2.8rem;margin-bottom:0.6rem;opacity:0.55}
+.uz .uz-title{font-size:0.85rem;font-weight:700;letter-spacing:0.1em;color:var(--primary);margin-bottom:0.3rem}
+.uz .uz-sub{font-size:0.65rem;color:var(--muted);letter-spacing:0.08em}
+.uz input[type="file"]{display:none}
+.pv{display:none;margin-top:1rem;border-radius:0.8rem;overflow:hidden;border:1px solid var(--border);position:relative}
+.pv.show{display:block}
+.pv img{width:100%;max-height:350px;object-fit:contain;background:#000;display:block}
+.pv .pv-actions{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(0,0,0,0.92));display:flex;gap:0.5rem;justify-content:center}
+.er{display:none;margin-top:1rem;border-radius:0.8rem;padding:1.25rem;background:rgba(0,230,118,0.04);border:1px solid rgba(0,230,118,0.18)}
+.er.show{display:block;animation:fadeSlide 0.4s ease}
+.er .erh{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.8rem;color:var(--success);font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase}
+.er .erg{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+.er .erl{font-size:0.55rem;letter-spacing:0.12em;color:var(--subtitle);text-transform:uppercase;margin-bottom:0.12rem}
+.er .erv{font-weight:600;color:var(--text);word-break:break-all;font-size:0.73rem}
+.er .erv.code{font-family:'JetBrains Mono',monospace;color:var(--primary);font-size:0.95rem;letter-spacing:0.05em}
+.er .er-act{display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:1000;padding:0.6rem 1.4rem;border-radius:999px;font-size:0.78rem;font-weight:600;background:var(--primary);color:var(--bg);box-shadow:0 8px 32px rgba(0,229,255,0.3);display:none;align-items:center;gap:0.5rem;animation:toastIn 0.25s ease-out}
+.toast.show{display:flex}
+.toast.err{background:var(--danger);box-shadow:0 8px 32px rgba(255,82,82,0.3)}
+.toast.ok{background:var(--success);box-shadow:0 8px 32px rgba(0,230,118,0.3)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.mo{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.86);backdrop-filter:blur(8px)}
+.mo.show{display:flex}
+.mb{text-align:center;padding:2.5rem;border-radius:1.5rem;background:rgba(20,28,40,0.97);border:1px solid var(--border-glow);max-width:24rem;width:90%;box-shadow:0 0 60px rgba(0,229,255,0.12)}
+.mb h3{font-size:0.95rem;font-weight:800;letter-spacing:0.15em;color:var(--primary);margin:0.6rem 0 0.3rem}
+.mb p{font-size:0.68rem;letter-spacing:0.1em;color:var(--muted);margin-bottom:1.5rem}
+.mb input{width:100%;padding:0.65rem 1rem;border-radius:999px;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text);text-align:center;letter-spacing:0.15em}
+.mb button{margin-top:1rem;width:100%;padding:0.65rem;border-radius:999px;font-size:0.73rem;font-weight:700;letter-spacing:0.15em;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#000;border:none;transition:all 0.2s}
+.admin-only{display:none}.admin-only.show{display:inline-block!important}
+footer{text-align:center;padding:3rem 0 1.5rem;font-size:0.63rem;letter-spacing:0.15em;color:var(--subtitle);position:relative;z-index:10}
+.stat-tag{display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.7rem;border-radius:999px;font-size:0.65rem;font-weight:600;background:rgba(0,229,255,0.06);border:1px solid var(--border);color:var(--primary);margin:0.15rem}
+.progress{height:3px;background:var(--border);border-radius:999px;overflow:hidden;margin:0.8rem 0;display:none}
+.progress.show{display:block}
+.progress .fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;width:0%;transition:width 0.4s ease}
+@media(max-width:640px){.hdr{flex-direction:column;gap:0.7rem;padding:0.7rem 1rem}.tabs{width:100%}.tb{flex:1;text-align:center;font-size:0.63rem;padding:0.32rem 0.5rem}.lg{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.erg{grid-template-columns:1fr!important}.fg-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="scan-overlay"></div>
+<div class="mo" id="adminModal"><div class="mb"><div style="font-size:2.5rem;margin-bottom:0.5rem">&#x1F510;</div><h3>ADMIN ACCESS</h3><p>Enter password to manage settings &amp; loadouts</p><input type="password" id="adminPwd" placeholder="Password..." autocomplete="off" onkeydown="if(event.key==='Enter')adminLogin()"><button onclick="adminLogin()">UNLOCK</button><div style="font-size:0.7rem;margin-top:0.8rem;color:var(--danger);min-height:1.2rem" id="adminErr"></div></div></div>
+<header><div class="hdr"><div class="logo"><div class="logo-i">S</div><div><div class="logo-t">SHXWN</div><div class="logo-s">CODM SETTINGS</div></div></div><div class="tabs"><button class="tb act" data-tab="home">Home</button><button class="tb" data-tab="loadouts">Loadouts</button><button class="tb admin-only" data-tab="manage" id="manageTab">Manage</button></div></div></header>
+<main>
+<div class="tc act" id="home-tab">
+<div class="hero"><h1>S H X W N</h1><p id="tagline"></p><div class="stats" id="stat-cards"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x1F381;</div><div><div class="st">SEND A GIFT</div><div class="ss">Support Shxwn</div></div></div><div class="sb" id="gift-sec"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x1F465;</div><div><div class="st">FOLLOW ME</div><div class="ss">Social Media</div></div></div><div class="sb" id="social-sec"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x1F3AE;</div><div><div class="st">SENSI &amp; HUD</div><div class="ss">Sensitivity &amp; HUD Codes</div></div></div><div class="sb" id="senski-sec"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x26A1;</div><div><div class="st">PERKS</div></div></div><div class="sb" id="perks-sec"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x1F441;</div><div><div class="st">FIELD OF VIEW</div></div></div><div class="sb" id="fov-sec"></div></div>
+<div class="sec"><div class="sh"><div class="si">&#x1F4D6;</div><div><div class="st">HOW TO USE</div></div></div><div class="sb" id="howto-sec"></div></div>
+</div>
+<div class="tc" id="loadouts-tab">
+<h2 style="font-size:1.5rem;font-weight:900;letter-spacing:0.1em;margin-bottom:0.4rem;color:var(--primary)" id="loadouts-count"></h2>
+<div class="sec" style="border-color:rgba(0,229,255,0.25)"><div class="sh"><div class="si">&#x1F4F8;</div><div><div class="st">AUTO-EXTRACT FROM SCREENSHOT</div><div class="ss">Upload CODM gunsmith screenshot &amp; paste OCR text → auto-detect code &amp; attachments</div></div></div>
+<div class="sb"><div class="uz" id="uploadZone" onclick="document.getElementById('fileInput').click()"><div class="uz-icon">&#x1F4E4;</div><div class="uz-title">DROP SCREENSHOT HERE OR CLICK</div><div class="uz-sub">Supports JPG, PNG, WEBP — from CODM gunsmith screen</div><input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])"></div>
+<div class="pv" id="preview"><img id="previewImg" src="" alt="Preview"><div class="pv-actions"><button class="bf" onclick="extractFromImage()">&#x1F50D; EXTRACT DATA</button><button class="bo" onclick="clearUpload()">&#x2716; CLEAR</button></div></div>
+<div class="progress" id="extractProgress"><div class="fill" id="progressFill"></div></div>
+<div class="er" id="extractResult"><div class="erh">&#x2705; EXTRACTION COMPLETE</div><div class="erg" id="extractFields"></div><div class="er-act"><button class="bf" onclick="addExtractedLoadout()">&#x2795; ADD AS NEW LOADOUT</button><button class="bo" onclick="copyExtractedCode()">&#x1F4CB; COPY CODE</button></div></div></div></div>
+<div class="ls"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="lsearch" placeholder="Search weapons..." oninput="renderLoadouts()"></div>
+<div class="fc" id="filter-chips"></div><div class="lg" id="l-grid"></div>
+</div>
+<div class="tc" id="manage-tab">
+<h2 style="font-size:1.5rem;font-weight:900;letter-spacing:0.1em;margin-bottom:0.3rem;color:var(--primary)">MANAGE</h2><p style="font-size:0.73rem;margin-bottom:1.5rem;color:var(--muted)">Admin panel — edit settings, perks &amp; loadouts</p>
+<div class="sec" style="border-color:rgba(0,229,255,0.35)"><div class="sh"><div class="si">&#x2699;</div><div><div class="st">GENERAL SETTINGS</div></div></div><div class="sb">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">SENSI (PHONE)</label><input id="msiP" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">SENSI (TABLET)</label><input id="msiT" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">HUD (PHONE)</label><input id="mhuP" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">HUD (TABLET)</label><input id="mhuT" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">FOV RANGE</label><input id="mfR" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">FOV FPP</label><input id="mfF" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<h4 style="font-size:0.7rem;font-weight:800;letter-spacing:0.15em;color:var(--primary);margin:1rem 0 0.7rem">PERKS (one per line)</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">OVERKILL (WILDCARD)</label><textarea id="mPO" rows="3" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text);resize:vertical;font-family:inherit"></textarea></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">RED WILDCARD</label><textarea id="mPR" rows="3" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text);resize:vertical;font-family:inherit"></textarea></div></div>
+<h4 style="font-size:0.7rem;font-weight:800;letter-spacing:0.15em;color:var(--primary);margin:1rem 0 0.7rem">SOCIAL &amp; SUPPORT</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">INSTAGRAM</label><input id="mig" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">TIKTOK</label><input id="mtt" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">FACEBOOK</label><input id="mfb" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">PAYPAL LINK</label><input id="mpp" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">GCASH NUMBER</label><input id="mgc" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<div style="margin-top:1rem"><button class="bf" onclick="saveAllSettings()" style="font-size:0.62rem">&#x1F4BE; SAVE ALL SETTINGS</button></div></div></div>
+<div class="sec" style="border-color:rgba(0,229,255,0.35)"><div class="sh"><div class="si">&#x2795;</div><div><div class="st">ADD LOADOUT</div></div></div><div class="sb">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">WEAPON NAME *</label><input id="mnw" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">CATEGORY</label><select id="mnc" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"><option>AR</option><option>SMG</option><option>Shotgun</option><option>LMG</option><option>Marksman</option><option>Sniper</option><option>Pistol</option><option>Launcher</option><option>Melee</option></select></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">RARITY</label><select id="mnr" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"><option>Common</option><option>Uncommon</option><option>Rare</option><option>Epic</option><option>Legendary</option><option>Mythic</option></select></div>
+<div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">BLUEPRINT</label><input id="mnb" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<div style="margin-top:0.75rem"><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">DESCRIPTION</label><input id="mnd" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div>
+<div class="fg-row" style="margin-top:0.75rem"><div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">CODM CODE</label><input id="mncc" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace"></div><div><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">ATTACHMENTS</label><input id="mna" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)"></div></div>
+<div style="margin-top:0.75rem"><label style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);display:block;margin-bottom:0.2rem">IMAGE URL</label><input id="mni" style="width:100%;padding:0.45rem 0.7rem;border-radius:0.5rem;font-size:0.83rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text)" placeholder="https://..."></div>
+<div style="margin-top:0.75rem"><button class="bf" onclick="addLoadout()" style="font-size:0.62rem">&#x2795; ADD LOADOUT</button></div></div></div>
+<div class="sec" style="border-color:rgba(0,229,255,0.35)"><div class="sh"><div class="si">&#x270F;</div><div><div class="st">EDIT / DELETE LOADOUTS</div></div></div><div class="sb" id="m-edit-list"></div></div>
+</div>
+</main>
+<footer>SHXWN — CODM LOADOUTS &amp; SETTINGS &middot; &copy; 2026<br><button onclick="logoutAdmin()" style="background:none;border:none;color:var(--subtitle);cursor:pointer;font-size:0.6rem;letter-spacing:0.15em;margin-top:0.5rem;display:none" id="logoutBtn">LOCK ADMIN</button></footer>
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+<script>
+var D={
+  "name": "Shxwn",
+  "tagline": "CODM Settings and Loadouts",
+  "sensiPhone": "7642663522247551065",
+  "sensiTablet": "",
+  "hudPhone": "7281953168294991373-7283189354372778091",
+  "hudTablet": "",
+  "fovRange": "85",
+  "fovFpp": "85",
+  "instagram": "https://www.instagram.com/",
+  "tiktok": "https://www.tiktok.com/",
+  "facebook": "https://www.facebook.com/",
+  "paypal": "https://paypal.me/",
+  "gcash": "09XX-XXX-XXXX",
+  "perksOverkill": [
+    "Lightweight",
+    "Gung-Ho",
+    "Dead Silence"
+  ],
+  "perksRed": [
+    "Lightweight",
+    "Gung-Ho",
+    "Dead Silence",
+    "Dauntless"
+  ],
+  "loadouts": [
+    {
+      "id": 1,
+      "name": "Chopper",
+      "category": "LMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "High capacity, great for holding angles",
+      "code": "",
+      "attachments": "Monolithic Suppressor, RTC Laser 1mW, Tactical Foregrip, Granulated Grip Tape, 40 Round Mag",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 2,
+      "name": "USS 9",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Silent killer, great for flanking",
+      "code": "",
+      "attachments": "OWC Light Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+      "image": "",
+      "favorite": 1,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 3,
+      "name": "Switchblade X9",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Unique burst fire, high damage",
+      "code": "",
+      "attachments": "Monolithic Suppressor, RTC Laser 1mW, Tactical Foregrip, Granulated Grip Tape, Extended Mag A",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 4,
+      "name": "BP50",
+      "category": "AR",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Versatile AR, good at all ranges",
+      "code": "",
+      "attachments": "OWC Light Suppressor, OWC Ranger, Tactical Foregrip, Granulated Grip Tape, 40 Round Mag",
+      "image": "",
+      "favorite": 1,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 5,
+      "name": "VMP",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "High mobility, great for rushing",
+      "code": "",
+      "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 6,
+      "name": "Locus",
+      "category": "Sniper",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Bolt-action sniper",
+      "code": "",
+      "attachments": "OWC Light Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 7,
+      "name": "Tundra",
+      "category": "Sniper",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "One-shot sniper, best for quickscoping",
+      "code": "",
+      "attachments": "Monolithic Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+      "image": "",
+      "favorite": 1,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 8,
+      "name": "SO-14",
+      "category": "Marksman",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Semi-auto marksman rifle",
+      "code": "",
+      "attachments": "OWC Light Suppressor, OWC Ranger, Tactical Foregrip, Granulated Grip Tape, FMJ",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 9,
+      "name": "QXR",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Compact SMG",
+      "code": "",
+      "attachments": "Monolithic Suppressor, RTC Laser 1mW, Granulated Grip Tape, No Stock, Extended Mag A",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 10,
+      "name": "DL Q33",
+      "category": "Sniper",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "One-shot sniper, best for quickscoping",
+      "code": "",
+      "attachments": "OWC Light Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 11,
+      "name": "Fennec",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Compact SMG",
+      "code": "",
+      "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 12,
+      "name": "KRM 262",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "blueprint": "Loaded Glitch",
+      "description": "Compact shotgun — Legendary blueprint",
+      "code": "KRM-262-1C2A5E6A9C",
+      "attachments": "Marauder Suppressor, RTC Light Extended Barrel, Speed Up Kill, RTC Laser 1mW, Stippled Grip Tape",
+      "image": "",
+      "favorite": 1,
+      "created_at": "2026-06-21"
+    },
+    {
+      "id": 13,
+      "name": "Pharo",
+      "category": "SMG",
+      "rarity": "Common",
+      "blueprint": "",
+      "description": "Compact SMG",
+      "code": "",
+      "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+      "image": "",
+      "favorite": 0,
+      "created_at": "2026-06-21"
+    }
+  ]
+};
+
+var adminUnlocked=false,adminHash="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",extractedData=null;
+document.querySelectorAll('.tb').forEach(function(b){b.onclick=function(){switchTab(this.dataset.tab)}});
+document.addEventListener('DOMContentLoaded',function(){renderHome();renderLoadouts();if(localStorage.codmAdmin==='1'){adminUnlocked=true;showAdmin()}if(localStorage.codmData)try{D=JSON.parse(localStorage.codmData)}catch(e){}});
+var uz=document.getElementById('uploadZone');if(uz){uz.ondragover=function(e){e.preventDefault();uz.classList.add('drag')};uz.ondragleave=function(){uz.classList.remove('drag')};uz.ondrop=function(e){e.preventDefault();uz.classList.remove('drag');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])}}
+
+function switchTab(t){
+  document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('act')});
+  var tb=document.querySelector('.tb[data-tab="'+t+'"]');if(tb)tb.classList.add('act');
+  document.querySelectorAll('.tc').forEach(function(x){x.classList.remove('act')});
+  var tc=document.getElementById(t+'-tab');if(tc)tc.classList.add('act');
+  if(t==='manage'&&!adminUnlocked){showAdminModal();return}
+  if(t==='home')renderHome();if(t==='loadouts')renderLoadouts();if(t==='manage'&&adminUnlocked)fillManageForm();
+}
+function showAdminModal(){document.getElementById('adminModal').classList.add('show');document.getElementById('adminPwd').focus();document.getElementById('adminPwd').value=''}
+function adminLogin(){
+  var p=document.getElementById('adminPwd').value;
+  if(sha256(p)===adminHash){adminUnlocked=true;localStorage.codmAdmin='1';document.getElementById('adminModal').classList.remove('show');document.getElementById('adminErr').textContent='';showAdmin();switchTab('manage')}
+  else{document.getElementById('adminErr').textContent='Invalid password';document.getElementById('adminPwd').value=''}
+}
+function showAdmin(){document.querySelectorAll('.admin-only').forEach(function(e){e.classList.add('show')});document.getElementById('logoutBtn').style.display='inline-block'}
+function logoutAdmin(){adminUnlocked=false;localStorage.removeItem('codmAdmin');document.querySelectorAll('.admin-only').forEach(function(e){e.classList.remove('show')});document.getElementById('logoutBtn').style.display='none';switchTab('home')}
+
+// SHA256
+function sha256(m){function R(r,n){return(r>>>n)|(r<<(32-n))}var K=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],H=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225];m=unescape(encodeURIComponent(m));for(var b=[],i=0;i<m.length;i++)b[i>>2]|=m.charCodeAt(i)<<(24-8*(i%4));b.push(m.length*8);while(b.length%16!=14)b.push(0);b.push(0);b.push(0);for(var o=0;o<b.length;o+=16){var W=[],a=H[0],c=H[1],d=H[2],e=H[3],f=H[4],g=H[5],h=H[6],j=H[7];for(i=0;i<64;i++){if(i<16)W[i]=b[o+i];else{var t=W[i-15],s=(R(t,7)^R(t,18)^(t>>>3)),t=W[i-2],u=(R(t,17)^R(t,19)^(t>>>10));W[i]=(W[i-7]+s+W[i-16]+u)|0}var S=(R(a,2)^R(a,13)^R(a,22)),C=((a&c)^(a&d)^(c&d)),v=(R(f,6)^R(f,11)^R(f,25)),w=((f&g)^(~f&h)),x=j+v+w+K[i]+W[i],y=S+C;j=h;h=g;g=f;f=(e+x)|0;e=d;d=c;c=a;a=(x+y)|0}H[0]=(H[0]+a)|0;H[1]=(H[1]+c)|0;H[2]=(H[2]+d)|0;H[3]=(H[3]+e)|0;H[4]=(H[4]+f)|0;H[5]=(H[5]+g)|0;H[6]=(H[6]+h)|0;H[7]=(H[7]+j)|0}var r='';for(i=0;i<8;i++){var n=H[i];r+=('0000000'+(n>>>0).toString(16)).slice(-8)}return r}
+
+function toast(m,t){t=t||'';var e=document.getElementById('toast'),s=document.getElementById('toast-msg');s.textContent=m;e.className='toast show '+t;setTimeout(function(){e.classList.remove('show')},2500)}
+function persist(){localStorage.codmData=JSON.stringify(D)}
+
+// HOME
+function renderHome(){
+  document.getElementById('tagline').textContent=D.tagline;
+  var sc=document.getElementById('stat-cards'),cats={};
+  D.loadouts.forEach(function(l){cats[l.category]=(cats[l.category]||0)+1});
+  var favs=D.loadouts.filter(function(l){return l.favorite}).length;
+  sc.innerHTML='<div class="sc"><div class="n">'+D.loadouts.length+'</div><div class="l">Loadouts</div></div><div class="sc"><div class="n">'+Object.keys(cats).length+'</div><div class="l">Categories</div></div><div class="sc"><div class="n">'+favs+'</div><div class="l">Favorites</div></div>';
+  var gs=document.getElementById('gift-sec');
+  gs.innerHTML='<a href="'+D.paypal+'" target="_blank" class="bo" style="margin-right:0.5rem">&#x1F4B0; PAYPAL</a><span class="stat-tag">GCASH: '+D.gcash+'</span>';
+  var ss=document.getElementById('social-sec');
+  ss.innerHTML='<a href="'+D.instagram+'" target="_blank" class="bo" style="margin-right:0.4rem">&#x1F4F7; INSTAGRAM</a><a href="'+D.tiktok+'" target="_blank" class="bo" style="margin-right:0.4rem">&#x1F3B5; TIKTOK</a><a href="'+D.facebook+'" target="_blank" class="bo">&#x1F4AC; FACEBOOK</a>';
+  var sk=document.getElementById('senski-sec');
+  sk.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem"><div><span class="stat-tag">PHONE: '+D.sensiPhone+'</span></div><div><span class="stat-tag">TABLET: '+(D.sensiTablet||'N/A')+'</span></div><div style="margin-top:0.5rem"><span class="stat-tag">HUD PHONE: '+D.hudPhone+'</span></div><div style="margin-top:0.5rem"><span class="stat-tag">HUD TABLET: '+(D.hudTablet||'N/A')+'</span></div></div>';
+  var pk=document.getElementById('perks-sec');
+  pk.innerHTML='<div style="margin-bottom:0.4rem"><strong style="color:var(--primary);font-size:0.65rem;letter-spacing:0.1em">OVERKILL:</strong> '+D.perksOverkill.map(function(p){return '<span class="stat-tag">'+p+'</span>'}).join(' ')+'</div><div><strong style="color:var(--primary);font-size:0.65rem;letter-spacing:0.1em">RED:</strong> '+D.perksRed.map(function(p){return '<span class="stat-tag">'+p+'</span>'}).join(' ')+'</div>';
+  var fv=document.getElementById('fov-sec');
+  fv.innerHTML='<span class="stat-tag">RANGE: '+D.fovRange+'</span> <span class="stat-tag">FPP: '+D.fovFpp+'</span>';
+  document.getElementById('howto-sec').innerHTML='<p style="font-size:0.73rem;color:var(--muted);line-height:1.6">Go to <strong style="color:var(--primary)">Loadouts</strong> tab → upload a CODM gunsmith screenshot to auto-extract weapon code &amp; attachments, or browse existing loadouts. Use the <strong style="color:var(--primary)">Manage</strong> tab (admin password required) to edit settings, perks, and add/remove loadouts.</p>';
+}
+
+// LOADOUTS
+var activeFilter='All';
+function renderLoadouts(){
+  var q=(document.getElementById('lsearch').value||'').toLowerCase();
+  var list=D.loadouts.filter(function(l){
+    if(activeFilter!=='All'&&l.category!==activeFilter)return false;
+    if(q&&l.name.toLowerCase().indexOf(q)===-1&&l.description.toLowerCase().indexOf(q)===-1&&l.attachments.toLowerCase().indexOf(q)===-1)return false;
+    return true;
+  });
+  document.getElementById('loadouts-count').textContent=list.length+' Loadout'+(list.length!==1?'s':'');
+  var cats=['All'];D.loadouts.forEach(function(l){if(cats.indexOf(l.category)===-1)cats.push(l.category)});
+  var fc=document.getElementById('filter-chips');
+  fc.innerHTML=cats.map(function(c){return '<span class="chip'+(c===activeFilter?' act':'')+'" onclick="activeFilter=\''+c+'\';renderLoadouts()">'+c+'</span>'}).join('');
+  var grid=document.getElementById('l-grid');
+  grid.innerHTML=list.map(function(l){
+    var rcls=l.rarity?l.rarity.toLowerCase():'';
+    return '<div class="lc"><div class="lch"><span class="lcat '+rcls+'">'+l.category+'</span>'+(!adminUnlocked?'':'<button class="lfv'+(l.favorite?' faved':'')+'" onclick="toggleFav('+l.id+')" title="Fav">&#x2764;</button>')+'</div><div class="limg">'+(l.image?'<img src="'+l.image+'" alt="'+l.name+'">':'<div class="lnopic">&#x1F52B;</div>')+'</div><div class="ln">'+(l.blueprint?l.blueprint+' — ':'')+l.name+'</div><div class="ld">'+l.description+'</div>'+(l.code?'<div class="lcode">'+l.code+'</div>':'')+'<div class="la"><strong>Attachments:</strong> '+l.attachments+'</div></div>';
+  }).join('');
+}
+
+// IMAGE UPLOAD & EXTRACTION
+var uploadedImageData=null;
+function handleFile(file){
+  if(!file||!file.type.match(/image\//)){toast('Please select an image file','err');return}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    uploadedImageData=e.target.result;
+    document.getElementById('previewImg').src=uploadedImageData;
+    document.getElementById('preview').classList.add('show');
+    document.getElementById('extractResult').classList.remove('show');
+    document.getElementById('extractProgress').classList.remove('show');
+    toast('Screenshot loaded! Click EXTRACT DATA','ok')
+  };
+  reader.readAsDataURL(file);
+}
+function clearUpload(){
+  uploadedImageData=null;
+  document.getElementById('preview').classList.remove('show');
+  document.getElementById('extractResult').classList.remove('show');
+  document.getElementById('extractProgress').classList.remove('show');
+  document.getElementById('fileInput').value='';
+  extractedData=null;
+}
+function extractFromImage(){
+  if(!uploadedImageData){toast('Upload a screenshot first','err');return}
+  var prog=document.getElementById('extractProgress'),fill=document.getElementById('progressFill');
+  prog.classList.add('show');fill.style.width='30%';
+  // Show manual input modal for text extraction (since browser cannot OCR)
+  setTimeout(function(){fill.style.width='60%'},300);
+  setTimeout(function(){
+    fill.style.width='100%';
+    setTimeout(function(){
+      prog.classList.remove('show');
+      // Show manual extraction modal
+      showExtractModal();
+    },400);
+  },600);
+}
+
+function showExtractModal(){
+  // Build a modal that lets user paste/type the OCR text or edit extracted data
+  var overlay=document.createElement('div');
+  overlay.className='mo show';
+  overlay.id='extractModal';
+  overlay.innerHTML='<div class="mb" style="max-width:32rem"><div style="font-size:2rem;margin-bottom:0.3rem">&#x1F4F8;</div><h3>PASTE OCR TEXT</h3><p>Use Zaro AI or any OCR tool on your screenshot, then paste the extracted text below. The system will auto-detect weapon name, code &amp; attachments.</p><textarea id="ocrInput" rows="8" style="width:100%;padding:0.7rem;border-radius:0.7rem;font-size:0.8rem;outline:none;background:rgba(20,28,40,0.6);border:1px solid var(--border);color:var(--text);resize:vertical;font-family:monospace" placeholder="Paste OCR text here...\n\nExample:\nKRM-262-1C2A5E6A9C\nMarauder Suppressor\nRTC Light Extended Barrel\nSpeed Up Kill\nRTC Laser 1mW\nStippled Grip Tape"></textarea><div style="display:flex;gap:0.5rem;margin-top:0.8rem"><button class="bf" onclick="parseOcrText()" style="flex:1">&#x1F50D; AUTO-DETECT</button><button class="bo" onclick="document.getElementById(\'extractModal\').remove()" style="flex:1">CANCEL</button></div></div>';
+  document.body.appendChild(overlay);
+}
+
+function parseOcrText(){
+  var text=document.getElementById('ocrInput').value.trim();
+  if(!text){toast('Paste some text first','err');return}
+  var lines=text.split(/\n/).map(function(l){return l.trim()}).filter(Boolean);
+  var data={name:'',code:'',attachments:[],blueprint:'',rarity:'Common',category:'AR'};
+
+  // Detect code: pattern like XXX-XXX-XXXXXXXXX
+  var codeRe=/[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+/i;
+  lines.forEach(function(l){
+    var m=l.match(codeRe);
+    if(m){data.code=m[0].toUpperCase();return}
+    // Check for name (first word before code line)
+    if(!data.name&&!/try|master|damage|fire rate|accuracy|mobility|range|control|details|attachment|equipped|perk|laser|underbarrel|ammunition|rear grip|default look|camo|select blueprint|save|recommended/i.test(l)&&l.length>2&&l.length<35&&!/^[0-9x\s]+$/i.test(l)){
+      data.name=l;
+    }
+  });
+
+  // Extract code parts
+  if(data.code){
+    var parts=data.code.split('-');
+    if(parts.length>=3){
+      // First part = gun name
+      if(!data.name)data.name=parts[0];
+      // Detect from parts
+      if(/[0-9A-F]{10}/i.test(parts[2])){data.code=data.code}
+    }
+  }
+
+  // Detect name from text like "KRM 262 - Loaded Glitch"
+  var bpMatch=text.match(/([A-Za-z0-9 ]+?)\s*[-—]\s*([A-Za-z0-9 ]+)/);
+  if(bpMatch){
+    if(!data.name)data.name=bpMatch[1].trim();
+    data.blueprint=bpMatch[2].trim();
+  }
+
+  // Detect attachments from known slot names
+  var knownAttachments=['Muzzle','Barrel','Optic','Stock','Perk','Laser','Underbarrel','Ammunition','Rear Grip'];
+  var attLines=[];
+  var foundSlots={};
+  lines.forEach(function(l,i){
+    var kl=knownAttachments.filter(function(k){return l.toLowerCase()===k.toLowerCase()});
+    if(kl.length>0&&i+1<lines.length){
+      var att=lines[i+1].trim();
+      if(att&&!knownAttachments.includes(att)&&att.length>2&&!/^(damage|fire|accuracy|mobility|range|control|details|attachment|equipped|recommended|default|camo|select|save|no\.?|try|master)$/i.test(att)){
+        attLines.push(att);
+      }
+    }
+  });
+  if(attLines.length>0)data.attachments=attLines;
+
+  // Detect rarity
+  var rarities=['Mythic','Legendary','Epic','Rare','Uncommon','Common'];
+  rarities.forEach(function(r){if(text.toLowerCase().indexOf(r.toLowerCase())!==-1)data.rarity=r});
+
+  // Detect category
+  if(text.match(/shotgun/i))data.category='Shotgun';
+  else if(text.match(/sniper/i))data.category='Sniper';
+  else if(text.match(/marksman/i))data.category='Marksman';
+  else if(text.match(/lmg/i))data.category='LMG';
+  else if(text.match(/smg/i))data.category='SMG';
+  else if(text.match(/\bAR\b/i))data.category='AR';
+  else if(text.match(/pistol/i))data.category='Pistol';
+  else if(text.match(/launcher/i))data.category='Launcher';
+
+  // Fallback: if code detected with known gun prefix
+  if(!data.name&&data.code){
+    var gunNames={'KRM':'KRM 262','DLQ':'DL Q33','LK24':'LK24','M4':'M4','AK47':'AK-47','AK117':'AK117','ICR':'ICR-1','HBR':'HBRa3','KN44':'KN-44','HVK':'HVK-30','BK57':'BK57','ASM10':'ASM10','MOW':'Man-O-War','DRH':'DR-H','PEACEKEEPER':'Peacekeeper MK2','FFAR':'FFAR 1','FR':'FR .556','TYPE25':'Type 25','ASVAL':'AS VAL','CR56':'CR-56 AMAX','KILO':'Kilo 141','GRAU':'Grau 5.56','ODEN':'Oden','MADD':'Maddox','EM2':'EM2','BP50':'BP50','QXR':'QXR','QQ9':'QQ9','MSMC':'MSMC','FENNEC':'Fennec','AGR':'AGR 556','CORDITE':'Cordite','GKS':'GKS','RUS':'RUS-79U','PDW':'PDW-57','RAZORBACK':'Razorback','HG40':'HG40','PP19':'PP19 Bizon','MP5':'MP5','MX9':'MX9','CBR4':'CBR4','PPSH':'PPSh-41','OTs':'OTs 9','MAC10':'MAC-10','LAPA':'LAPA','SWITCHBLADE':'Switchblade X9','KSP':'KSP 45','TEC9':'TEC-9','ISO':'ISO','STRIKER':'Striker 45','CHICOM':'Chicom','PHARO':'Pharo'};
+    var codePrefix=data.code.split('-')[0].toUpperCase();
+    if(gunNames[codePrefix])data.name=gunNames[codePrefix];
+  }
+
+  // Populate extraction display
+  extractedData=data;
+  document.getElementById('extractModal').remove();
+  displayExtracted(data);
+}
+
+function displayExtracted(data){
+  var ef=document.getElementById('extractFields');
+  ef.innerHTML='';
+  var fields=[{l:'Weapon Name',v:data.name},{l:'Code',v:data.code,cls:'code'},{l:'Blueprint',v:data.blueprint},{l:'Category',v:data.category},{l:'Rarity',v:data.rarity},{l:'Attachments',v:Array.isArray(data.attachments)?data.attachments.join(', '):data.attachments}];
+  fields.forEach(function(f){
+    ef.innerHTML+='<div><div class="erl">'+f.l+'</div><div class="erv'+(f.cls?' '+f.cls:'')+'">'+(f.v||'(not detected)')+'</div></div>';
+  });
+  document.getElementById('extractResult').classList.add('show');
+  toast('Extraction complete! Review and add loadout','ok');
+}
+
+function addExtractedLoadout(){
+  if(!extractedData){toast('Extract data first','err');return}
+  var d=extractedData;
+  var nl={
+    id:Math.max.apply(null,D.loadouts.map(function(l){return l.id}))+1,
+    name:d.name||'Unknown',
+    category:d.category||'AR',
+    rarity:d.rarity||'Common',
+    blueprint:d.blueprint||'',
+    description:(d.blueprint?d.blueprint+' ':'')+(d.rarity||'')+' '+d.name,
+    code:d.code||'',
+    attachments:Array.isArray(d.attachments)?d.attachments.join(', '):(d.attachments||''),
+    image:'',
+    favorite:0,
+    created_at:new Date().toISOString().split('T')[0]
+  };
+  D.loadouts.push(nl);persist();renderLoadouts();
+  document.getElementById('extractResult').classList.remove('show');
+  toast('Loadout added! &#x2714;','ok');
+}
+function copyExtractedCode(){
+  if(!extractedData||!extractedData.code){toast('No code to copy','err');return}
+  navigator.clipboard.writeText(extractedData.code).then(function(){toast('Code copied! &#x1F4CB;','ok')});
+}
+
+// MANAGE
+function fillManageForm(){
+  document.getElementById('msiP').value=D.sensiPhone;document.getElementById('msiT').value=D.sensiTablet;
+  document.getElementById('mhuP').value=D.hudPhone;document.getElementById('mhuT').value=D.hudTablet;
+  document.getElementById('mfR').value=D.fovRange;document.getElementById('mfF').value=D.fovFpp;
+  document.getElementById('mPO').value=D.perksOverkill.join('\n');document.getElementById('mPR').value=D.perksRed.join('\n');
+  document.getElementById('mig').value=D.instagram;document.getElementById('mtt').value=D.tiktok;
+  document.getElementById('mfb').value=D.facebook;document.getElementById('mpp').value=D.paypal;document.getElementById('mgc').value=D.gcash;
+  renderEditList();
+}
+function saveAllSettings(){
+  D.sensiPhone=document.getElementById('msiP').value;D.sensiTablet=document.getElementById('msiT').value;
+  D.hudPhone=document.getElementById('mhuP').value;D.hudTablet=document.getElementById('mhuT').value;
+  D.fovRange=document.getElementById('mfR').value;D.fovFpp=document.getElementById('mfF').value;
+  D.perksOverkill=document.getElementById('mPO').value.split('\n').map(function(x){return x.trim()}).filter(Boolean);
+  D.perksRed=document.getElementById('mPR').value.split('\n').map(function(x){return x.trim()}).filter(Boolean);
+  D.instagram=document.getElementById('mig').value;D.tiktok=document.getElementById('mtt').value;
+  D.facebook=document.getElementById('mfb').value;D.paypal=document.getElementById('mpp').value;D.gcash=document.getElementById('mgc').value;
+  persist();renderHome();toast('Settings saved! &#x2714;','ok');
+}
+function addLoadout(){
+  var nw=document.getElementById('mnw').value.trim();if(!nw){toast('Weapon name required','err');return}
+  var nl={
+    id:Math.max.apply(null,D.loadouts.map(function(l){return l.id}))+1,
+    name:nw,
+    category:document.getElementById('mnc').value,
+    rarity:document.getElementById('mnr').value,
+    blueprint:document.getElementById('mnb').value.trim(),
+    description:document.getElementById('mnd').value.trim()||nw,
+    code:document.getElementById('mncc').value.trim(),
+    attachments:document.getElementById('mna').value.trim(),
+    image:document.getElementById('mni').value.trim(),
+    favorite:0,
+    created_at:new Date().toISOString().split('T')[0]
+  };
+  D.loadouts.push(nl);persist();renderLoadouts();renderEditList();
+  document.getElementById('mnw').value='';document.getElementById('mnb').value='';document.getElementById('mnd').value='';
+  document.getElementById('mncc').value='';document.getElementById('mna').value='';document.getElementById('mni').value='';
+  toast('Loadout added! &#x2714;','ok');
+}
+function renderEditList(){
+  var el=document.getElementById('m-edit-list');
+  el.innerHTML=D.loadouts.map(function(l){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.75rem;margin-bottom:0.3rem;border-radius:0.5rem;background:rgba(20,28,40,0.4);border:1px solid var(--border)"><span style="font-size:0.75rem;font-weight:700">'+l.name+' <span style="color:var(--muted);font-size:0.6rem">('+l.category+')</span></span><span><button class="bo" style="padding:0.2rem 0.7rem;font-size:0.58rem;margin-right:0.3rem" onclick="editLoadout('+l.id+')">EDIT</button><button class="bs danger" style="width:2rem;height:2rem;font-size:0.7rem" onclick="deleteLoadout('+l.id+')">&#x2716;</button></span></div>';
+  }).join('');
+}
+function editLoadout(id){
+  var l=D.loadouts.find(function(x){return x.id===id});if(!l)return;
+  document.getElementById('mnw').value=l.name;document.getElementById('mnc').value=l.category;
+  document.getElementById('mnr').value=l.rarity;document.getElementById('mnb').value=l.blueprint;
+  document.getElementById('mnd').value=l.description;document.getElementById('mncc').value=l.code;
+  document.getElementById('mna').value=l.attachments;document.getElementById('mni').value=l.image;
+  // Remove and re-add
+  D.loadouts=D.loadouts.filter(function(x){return x.id!==id});
+  persist();renderLoadouts();renderEditList();
+  toast('Edit loadout fields populated. Change and click ADD','');
+}
+function deleteLoadout(id){
+  if(!confirm('Delete this loadout?'))return;
+  D.loadouts=D.loadouts.filter(function(x){return x.id!==id});
+  persist();renderLoadouts();renderEditList();toast('Loadout deleted','err');
+}
+function toggleFav(id){
+  var l=D.loadouts.find(function(x){return x.id===id});if(!l)return;
+  l.favorite=l.favorite?0:1;persist();renderLoadouts();renderHome();
+}
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3279d41ec7804124a29acc6e692f9a2b","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
