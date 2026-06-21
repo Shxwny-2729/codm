@@ -1,0 +1,241 @@
+{
+    "fields": [
+        {
+            "field": "id",
+            "type": "number",
+            "required": true
+        },
+        {
+            "field": "name",
+            "type": "string",
+            "required": true
+        },
+        {
+            "field": "category",
+            "type": "enum",
+            "required": true,
+            "enums": [
+                "AR",
+                "SMG",
+                "Shotgun",
+                "LMG",
+                "Marksman",
+                "Sniper",
+                "Pistol",
+                "Launcher",
+                "Melee"
+            ]
+        },
+        {
+            "field": "rarity",
+            "type": "enum",
+            "enums": [
+                "Common",
+                "Uncommon",
+                "Rare",
+                "Epic",
+                "Legendary",
+                "Mythic"
+            ]
+        },
+        {
+            "field": "blueprint",
+            "type": "string"
+        },
+        {
+            "field": "description",
+            "type": "string"
+        },
+        {
+            "field": "code",
+            "type": "string"
+        },
+        {
+            "field": "attachments",
+            "type": "string"
+        },
+        {
+            "field": "image",
+            "type": "string"
+        },
+        {
+            "field": "favorite",
+            "type": "number"
+        },
+        {
+            "field": "created_at",
+            "type": "string"
+        }
+    ],
+    "data": [
+        {
+            "id": 1,
+            "name": "Chopper",
+            "category": "LMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "High capacity, great for holding angles",
+            "code": "",
+            "attachments": "Monolithic Suppressor, RTC Laser 1mW, Tactical Foregrip, Granulated Grip Tape, 40 Round Mag",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 2,
+            "name": "USS 9",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Silent killer, great for flanking",
+            "code": "",
+            "attachments": "OWC Light Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+            "image": "",
+            "favorite": 1,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 3,
+            "name": "Switchblade X9",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Unique burst fire, high damage",
+            "code": "",
+            "attachments": "Monolithic Suppressor, RTC Laser 1mW, Tactical Foregrip, Granulated Grip Tape, Extended Mag A",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 4,
+            "name": "BP50",
+            "category": "AR",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Versatile AR, good at all ranges",
+            "code": "",
+            "attachments": "OWC Light Suppressor, OWC Ranger, Tactical Foregrip, Granulated Grip Tape, 40 Round Mag",
+            "image": "",
+            "favorite": 1,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 5,
+            "name": "VMP",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "High mobility, great for rushing",
+            "code": "",
+            "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 6,
+            "name": "Locus",
+            "category": "Sniper",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Bolt-action sniper",
+            "code": "",
+            "attachments": "OWC Light Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 7,
+            "name": "Tundra",
+            "category": "Sniper",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "One-shot sniper, best for quickscoping",
+            "code": "",
+            "attachments": "Monolithic Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+            "image": "",
+            "favorite": 1,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 8,
+            "name": "SO-14",
+            "category": "Marksman",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Semi-auto marksman rifle",
+            "code": "",
+            "attachments": "OWC Light Suppressor, OWC Ranger, Tactical Foregrip, Granulated Grip Tape, FMJ",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 9,
+            "name": "QXR",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Compact SMG",
+            "code": "",
+            "attachments": "Monolithic Suppressor, RTC Laser 1mW, Granulated Grip Tape, No Stock, Extended Mag A",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 10,
+            "name": "DL Q33",
+            "category": "Sniper",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "One-shot sniper, best for quickscoping",
+            "code": "",
+            "attachments": "OWC Light Suppressor, OWC Marksman, Stippled Grip Tape, FMJ",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 11,
+            "name": "Fennec",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Compact SMG",
+            "code": "",
+            "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 12,
+            "name": "KRM 262",
+            "category": "Shotgun",
+            "rarity": "Legendary",
+            "blueprint": "Loaded Glitch",
+            "description": "Compact shotgun — Legendary blueprint",
+            "code": "KRM-262-1C2A5E6A9C",
+            "attachments": "Marauder Suppressor, RTC Light Extended Barrel, Speed Up Kill, RTC Laser 1mW, Stippled Grip Tape",
+            "image": "",
+            "favorite": 1,
+            "created_at": "2026-06-21"
+        },
+        {
+            "id": 13,
+            "name": "Pharo",
+            "category": "SMG",
+            "rarity": "Common",
+            "blueprint": "",
+            "description": "Compact SMG",
+            "code": "",
+            "attachments": "Monolithic Suppressor, OWC Marksman, Granulated Grip Tape, No Stock, Extended Mag A",
+            "image": "",
+            "favorite": 0,
+            "created_at": "2026-06-21"
+        }
+    ]
+}
