@@ -1,127 +1,160 @@
-function flash(m){document.getElementById("toast-msg").textContent=m;var t=document.getElementById("toast");t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1800)}
-function cp(t,l){if(!t){flash("Nothing to copy");return}navigator.clipboard.writeText(t).then(function(){flash(l||"Copied!")}).catch(function(){flash("Copy failed")})}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shxwn — CODM Settings & Loadouts</title>
+<style>
+:root{--bg:#1a0f24;--bg2:#2a1838;--card:rgba(60,35,85,0.55);--border:rgba(220,174,255,0.18);--primary:#dcaeff;--primary-dark:#b87adf;--primary-deep:#8a4fb3;--text:#f5ecff;--muted:#c9b8da;--subtle:#8a7a9c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 20% 0%,var(--bg2) 0%,var(--bg) 60%);color:var(--text);min-height:100vh;position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;top:20vh;left:10vw;width:18rem;height:18rem;border-radius:50%;opacity:.2;filter:blur(4rem);background:var(--primary);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;top:50vh;right:0;width:24rem;height:24rem;border-radius:50%;opacity:.1;filter:blur(4rem);background:var(--primary-dark);pointer-events:none;z-index:0}
 
-function rSensi(){
- var sc=D["sensi"+(dev=="phone"?"Phone":"Tablet")]||"";
- var hc=D["hud"+(dev=="phone"?"Phone":"Tablet")]||"";
- var e=document.getElementById("sensi-sec");
- var h='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem"><p style="font-size:.875rem;color:var(--muted)">Import codes for CODM</p><div class="dt"><button class="db '+(dev=="phone"?"act":"")+'" data-dev="phone">Phone</button><button class="db '+(dev=="tablet"?"act":"")+'" data-dev="tablet">Tablet</button></div></div>';var ids="sensi-codes";
- h+='<div id="'+ids+'">';
- h+='<div class="cr" onclick="cp(\''+sc.replace(/'/g,"\\'")+'\',\'Sensitivity copied!\')"><div class="cl">SENSITIVITY ('+dev.toUpperCase()+')</div><div class="cv">'+(sc||'<em style="color:var(--subtle)">No code set</em>')+'</div><div class="ch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> CLICK TO COPY</div></div>';
- h+='<div class="cr" onclick="cp(\''+hc.replace(/'/g,"\\'")+'\',\'HUD copied!\')"><div class="cl">HUD LAYOUT ('+dev.toUpperCase()+')</div><div class="cv">'+(hc||'<em style="color:var(--subtle)">No code set</em>')+'</div><div class="ch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> CLICK TO COPY</div></div>';
- h+='</div>';
- h+='<div class="fg2" style="margin-top:1.25rem"><button class="bf" id="copy-both-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Both</button><button class="bo" id="share-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share</button></div>';
- e.innerHTML=h;
- // bind events
- document.getElementById("copy-both-btn").onclick=function(){
-  var s=D["sensi"+(dev=="phone"?"Phone":"Tablet")]||"";
-  var hc2=D["hud"+(dev=="phone"?"Phone":"Tablet")]||"";
-  cp(s+"\n"+hc2,"Both codes copied!");
- };
- document.getElementById("share-btn").onclick=function(){
-  if(navigator.share)navigator.share({title:"Shxwn CODM",url:location.href}).catch(function(){});
-  else cp(location.href,"Link copied!");
- };
- // device toggle
- Array.from(document.querySelectorAll("#sensi-sec .db")).forEach(function(b){
-  b.onclick=function(){dev=b.getAttribute("data-dev");rSensi();}
- });
-}
+header{position:sticky;top:0;z-index:40;background:rgba(26,15,36,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.hdr{max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.75rem}
+.logo-i{width:2.5rem;height:2.5rem;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.125rem;background:linear-gradient(135deg,var(--primary),var(--primary-deep));color:#fff;box-shadow:0 0 20px rgba(220,174,255,.25)}
+.logo-t{font-size:1rem;font-weight:800;letter-spacing:.2em;color:var(--primary)}
+.logo-s{font-size:.625rem;letter-spacing:.15em;color:var(--subtle)}
+.tabs{display:flex;gap:.25rem;padding:.25rem;border-radius:9999px;background:rgba(220,174,255,.08);border:1px solid var(--border)}
+.tb{padding:.25rem 1rem;border-radius:9999px;border:none;cursor:pointer;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.2s;background:transparent;color:var(--muted)}
+.tb.act{background:var(--primary);color:var(--bg)}
+.tb:hover:not(.act){color:var(--text)}
+main{max-width:72rem;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:10}
+.tc{display:none}.tc.act{display:block}
+.sec{border-radius:1rem;padding:1.5rem;transition:.2s;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px);margin-bottom:1.5rem}
+.sh{display:flex;align-items:center;gap:.75rem;margin-bottom:.25rem}
+.si{width:2.25rem;height:2.25rem;border-radius:.75rem;display:flex;align-items:center;justify-content:center;background:rgba(220,174,255,.125);border:1px solid rgba(220,174,255,.25);box-shadow:0 0 16px rgba(220,174,255,.2);color:var(--primary);flex-shrink:0}
+.st{font-size:.875rem;font-weight:900;letter-spacing:.15em;color:var(--primary)}
+.ss{font-size:.75rem;color:var(--muted)}
+.sb{margin-top:1rem}
+.hero{text-align:center;padding:2.5rem 0}
+.hero h1{font-size:clamp(3rem,8vw,4.5rem);font-weight:900;letter-spacing:.3em;margin-bottom:.75rem;background:linear-gradient(135deg,var(--primary),var(--primary-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:.875rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;max-width:32rem;margin-left:auto;margin-right:auto}
+.sc{border-radius:1rem;padding:1rem;transition:.2s;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px)}
+.sc:hover{transform:translateY(-.125rem)}
+.sc .n{font-size:1.875rem;font-weight:900;color:var(--primary)}
+.sc .l{font-size:.625rem;letter-spacing:.2em;margin-top:.25rem;color:var(--subtle)}
+.bo{padding:.5rem 1.25rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.2s;cursor:pointer;background:transparent;color:var(--primary);border:1px solid rgba(220,174,255,.4);display:inline-flex;align-items:center;gap:.375rem}
+.bo:hover{background:rgba(220,174,255,.1);border-color:var(--primary)}
+.bo:disabled{opacity:.4;cursor:not-allowed}
+.bf{padding:.5rem 1.25rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.2s;cursor:pointer;background:var(--primary);color:var(--bg);border:none;box-shadow:0 4px 16px rgba(220,174,255,.25);display:inline-flex;align-items:center;gap:.375rem}
+.bf:hover{background:#e6c2ff}
+.bs{width:3rem;height:3rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:.2s;cursor:pointer;background:transparent;color:var(--primary);border:1px solid rgba(220,174,255,.4)}
+.bs:hover{background:rgba(220,174,255,.1);transform:translateY(-2px)}
+.bs:disabled{opacity:.4;cursor:not-allowed}
+.cr{border-radius:.75rem;padding:1rem;transition:.2s;cursor:pointer;background:rgba(220,174,255,.05);border:1px solid var(--border);margin-bottom:.75rem}
+.cr:hover{border-color:rgba(220,174,255,.4);background:rgba(220,174,255,.1)}
+.cr .cl{font-size:.625rem;font-weight:700;letter-spacing:.15em;margin-bottom:.5rem;color:var(--primary)}
+.cr .cv{font-family:monospace;font-size:.875rem;word-break:break-all;color:var(--text)}
+.ch{font-size:.625rem;margin-top:.5rem;display:flex;align-items:center;gap:.25rem;letter-spacing:.1em;color:var(--subtle)}
+.pk{border-radius:.75rem;padding:1rem;background:rgba(220,174,255,.05);border:1px solid var(--border)}
+.pk h4{font-size:1rem;font-weight:900;letter-spacing:.1em;color:var(--primary)}
+.pk .ps{font-size:.625rem;letter-spacing:.1em;margin-bottom:.75rem;color:var(--subtle)}
+.pk li{display:flex;align-items:center;gap:.5rem;font-size:.875rem;padding:.25rem 0;color:var(--text);list-style:none}
+.fv{border-radius:.75rem;padding:1.25rem;text-align:center;background:rgba(220,174,255,.05);border:1px solid var(--border)}
+.fv .fv-v{font-size:2.25rem;font-weight:900;color:var(--primary)}
+.fv .fv-l{font-size:.625rem;letter-spacing:.15em;margin-top:.5rem;color:var(--muted)}
+.hs{border-radius:1rem;padding:1rem;transition:.2s;background:var(--card);border:1px solid var(--border)}
+.hs:hover{transform:translateY(-.125rem)}
+.hn{width:2.25rem;height:2.25rem;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:.75rem;background:rgba(220,174,255,.15);color:var(--primary);border:1px solid rgba(220,174,255,.3)}
+.ls{position:relative;max-width:28rem;margin-bottom:1rem}
+.ls input{width:100%;padding:.625rem .75rem .625rem 2.5rem;border-radius:9999px;font-size:.875rem;outline:none;background:var(--card);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(10px)}
+.ls input::placeholder{color:var(--subtle)}
+.ls svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--subtle)}
+.fc{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{padding:.25rem 1rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.2s;cursor:pointer;background:rgba(220,174,255,.05);color:var(--muted);border:1px solid var(--border)}
+.chip.act{background:var(--primary);color:var(--bg);border-color:var(--primary)}
+.lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.lc{border-radius:1rem;padding:1.25rem;transition:.2s;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px)}
+.lc:hover{transform:translateY(-.25rem)}
+.lch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem}
+.lcat{font-size:.5625rem;font-weight:700;letter-spacing:.2em;padding:.125rem .5rem;border-radius:.375rem;display:inline-block}
+.limg{height:6rem;border-radius:.75rem;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;background:linear-gradient(135deg,rgba(220,174,255,.08),rgba(220,174,255,.02));border:1px solid rgba(220,174,255,.12);font-size:2rem;color:var(--primary);opacity:.3}
+.ln{font-weight:900;font-size:1.125rem;letter-spacing:.1em;color:var(--text)}
+.ld{font-size:.75rem;margin:.25rem 0 .75rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5rem}
+.la{font-size:.625rem;line-height:1.5;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px dashed var(--border);color:var(--subtle)}
+.la strong{color:var(--primary);letter-spacing:.1em}
+.lact{display:flex;gap:.5rem}
+.lco{flex:1;display:flex;align-items:center;justify-content:center;gap:.375rem;padding:.5rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.1em;transition:.2s;cursor:pointer;border:none;color:var(--bg)}
+.lfv{background:none;border:none;cursor:pointer;color:var(--subtle);transition:transform .15s;padding:.25rem}
+.lfv:hover{transform:scale(1.15)}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:100;padding:.625rem 1.25rem;border-radius:9999px;font-size:.875rem;font-weight:600;background:var(--primary);color:var(--bg);box-shadow:0 8px 32px rgba(220,174,255,.3);display:none;align-items:center;gap:.5rem}
+.toast.show{display:flex;animation:fadeInUp .2s ease-out}
+footer{text-align:center;padding:3rem 0 1rem;font-size:.6875rem;letter-spacing:.15em;color:var(--subtle)}
+.dt{display:flex;gap:.25rem;padding:.25rem;border-radius:9999px;background:rgba(220,174,255,.08);border:1px solid var(--border)}
+.db{padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:600;transition:.2s;cursor:pointer;background:transparent;color:var(--muted);border:none}
+.db.act{background:var(--primary);color:var(--bg)}
+svg.ic{width:14px;height:14px}
+.fg2{display:flex;gap:.5rem;flex-wrap:wrap}
 
-function rHome(){
- document.getElementById("tagline").textContent=D.tagline;
- document.getElementById("stat-cards").innerHTML='<div class="sc"><div class="n">'+D.loadouts.length+'</div><div class="l">LOADOUTS</div></div><div class="sc"><div class="n">'+D.loadouts.filter(function(l){return l.favorite}).length+'</div><div class="l">FAVORITES</div></div><div class="sc"><div class="n">2</div><div class="l">SETTINGS</div></div>';
- // Gift
- var g=document.getElementById("gift-sec");
- g.innerHTML='<p style="font-size:.875rem;margin-bottom:1rem;color:var(--muted)">Send a gift via PayPal or GCash</p><div class="fg2">';
- g.innerHTML+=(D.paypal?'<button class="bo">PAYPAL</button>':'<button class="bo" disabled>PAYPAL</button>');
- g.innerHTML+=(D.gcash?'<button class="bo">GCASH</button>':'<button class="bo" disabled>GCASH</button>');
- g.innerHTML+='</div>';
- var btns=g.querySelectorAll(".bo:not([disabled])");
- if(btns[0])btns[0].onclick=function(){window.open(D.paypal,'_blank');};
- if(btns[1])btns[1].onclick=function(){cp(D.gcash,"GCash copied!");};
- // Social
- var s=document.getElementById("social-sec");
- s.innerHTML='<p style="font-size:.875rem;margin-bottom:1rem;color:var(--muted)">Connect with Shxwn on all platforms</p><div class="fg2">';
- if(D.instagram)s.innerHTML+='<button class="bs" title="Instagram"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></button>';
- if(D.tiktok)s.innerHTML+='<button class="bs" title="TikTok"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></button>';
- if(D.facebook)s.innerHTML+='<button class="bs" title="Facebook"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></button>';
- s.innerHTML+='</div>';
- var sb=s.querySelectorAll(".bs");
- if(sb[0])sb[0].onclick=function(){window.open(D.instagram,'_blank');};
- if(sb[1])sb[1].onclick=function(){window.open(D.tiktok,'_blank');};
- if(sb[2])sb[2].onclick=function(){window.open(D.facebook,'_blank');};
- // Sensi
- rSensi();
- // Perks
- var pk=document.getElementById("perks-sec");
- pk.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem"><div class="pk"><h4>Overkill</h4><div class="ps">Wildcard Combo</div><ul>'+D.perksOverkill.map(function(p){return '<li><svg class="ic" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'+p+'</li>'}).join('')+'</ul></div><div class="pk"><h4>Red Wildcard</h4><div class="ps">4 Perks Combo</div><ul>'+D.perksRed.map(function(p){return '<li><svg class="ic" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'+p+'</li>'}).join('')+'</ul></div></div>';
- // FOV
- document.getElementById("fov-sec").innerHTML='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem"><div class="fv"><div class="fv-v">'+D.fovRange+'</div><div class="fv-l">FOV RANGE</div></div><div class="fv"><div class="fv-v">'+D.fovFpp+'</div><div class="fv-l">FOV FPP</div></div></div>';
- // HowTo
- document.getElementById("howto-sec").innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem"><div class="hs"><div class="hn">1</div><h4 style="font-weight:700;font-size:.875rem;letter-spacing:.1em;margin-bottom:.25rem;color:var(--text)">COPY CODE</h4><p style="font-size:.75rem;line-height:1.5;color:var(--muted)">Click the copy button on any loadout or setting card</p></div><div class="hs"><div class="hn">2</div><h4 style="font-weight:700;font-size:.875rem;letter-spacing:.1em;margin-bottom:.25rem;color:var(--text)">OPEN GAME</h4><p style="font-size:.75rem;line-height:1.5;color:var(--muted)">Launch CODM and go to loadout or settings menu</p></div><div class="hs"><div class="hn">3</div><h4 style="font-weight:700;font-size:.875rem;letter-spacing:.1em;margin-bottom:.25rem;color:var(--text)">IMPORT</h4><p style="font-size:.75rem;line-height:1.5;color:var(--muted)">Click Import button and paste the code</p></div><div class="hs"><div class="hn">4</div><h4 style="font-weight:700;font-size:.875rem;letter-spacing:.1em;margin-bottom:.25rem;color:var(--text)">DOMINATE</h4><p style="font-size:.75rem;line-height:1.5;color:var(--muted)">Equip and start destroying lobbies</p></div></div>';
-}
+/* Admin Login Modal */
+.al-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(10,5,20,0.85);backdrop-filter:blur(8px)}
+.al-overlay.show{display:flex}
+.al-box{text-align:center;padding:2.5rem;border-radius:1.5rem;background:rgba(60,35,85,0.95);border:1px solid rgba(220,174,255,0.25);max-width:22rem;width:90%;box-shadow:0 0 40px rgba(220,174,255,0.15)}
+.al-box .al-icon{width:3rem;height:3rem;border-radius:1rem;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#dcaeff,#8a4fb3);color:#fff;font-size:1.25rem;margin-bottom:1rem}
+.al-box h3{font-size:.875rem;font-weight:900;letter-spacing:.2em;color:#dcaeff;margin-bottom:.25rem}
+.al-box p{font-size:.625rem;letter-spacing:.15em;color:#8a7a9c;margin-bottom:1.5rem}
+.al-box input{width:100%;padding:.75rem 1rem;border-radius:9999px;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid rgba(220,174,255,0.18);color:#f5ecff;text-align:center;letter-spacing:.1em;transition:.2s}
+.al-box input:focus{border-color:#dcaeff;box-shadow:0 0 20px rgba(220,174,255,.15)}
+.al-box button{margin-top:1rem;width:100%;padding:.75rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.2s;background:#dcaeff;color:#1a0f24;border:none}
+.al-box button:hover{background:#e6c2ff}
+.al-box .al-err{font-size:.75rem;margin-top:.75rem;color:#ff7a99;min-height:1.25rem}
+.al-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#8a7a9c;cursor:pointer;font-size:1.25rem;padding:.25rem}
+.admin-only{display:none}
+.admin-only.show{display:block}
+.tb.admin-only{display:none}
+.tb.admin-only.show{display:inline-block}
 
-function rLoadouts(){
- var ls=D.loadouts;
- var q=(document.getElementById("lsearch").value||"").toLowerCase();
- var filtered=ls.filter(function(l){
-  if(cat!="All"&&l.category!=cat)return false;
-  if(q&&l.name.toLowerCase().indexOf(q)<0&&(l.description||"").toLowerCase().indexOf(q)<0)return false;
-  return true;
- });
- document.getElementById("loadouts-count").textContent="LOADOUTS ("+filtered.length+")";
- var fchips='<button class="chip '+(cat=="All"?"act":"")+'">All</button>';
- ["AR","SMG","Shotgun","LMG","Marksman","Sniper"].forEach(function(c){fchips+='<button class="chip '+(cat==c?"act":"")+'">'+c+'</button>';});
- document.getElementById("filter-chips").innerHTML=fchips;
- // bind chips
- Array.from(document.getElementById("filter-chips").querySelectorAll(".chip")).forEach(function(b){
-  b.onclick=function(){cat=b.textContent;rLoadouts();};
- });
- // grid
- var g=document.getElementById("l-grid");
- var h="";
- filtered.forEach(function(l){
-  var cc=CC[l.category]||"#dcaeff";
-  h+='<div class="lc"><div class="lch"><span class="lcat" style="background:'+cc+'20;color:'+cc+';border:1px solid '+cc+'40">'+(l.category||"").toUpperCase()+'</span><button class="lfv" style="color:'+(l.favorite?cc:'var(--subtle)')+'" data-id="'+l.id+'"><svg class="ic" viewBox="0 0 24 24" fill="'+(l.favorite?'currentColor':'none')+'" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>';
-  h+='<div class="limg">'+(l.image?'<img src="'+l.image+'" alt="" style="max-height:100%;max-width:100%;object-fit:contain">':'&#9678;')+'</div>';
-  h+='<div class="ln">'+(l.name||"").toUpperCase()+'</div>';
-  h+='<div class="ld">'+(l.description||"—")+'</div>';
-  if(l.attachments)h+='<div class="la"><strong>ATTACHMENTS</strong><br>'+l.attachments+'</div>';
-  h+='<div class="lact"><button class="lco" style="background:'+cc+'" data-copy="'+(l.code||l.attachments||"").replace(/"/g,'&quot;')+'"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPY</button></div></div>';
- });
- g.innerHTML=h||'<div style="grid-column:1/-1;text-align:center;padding:4rem 0;color:var(--subtle)">No weapons match your filters</div>';
- // bind copy buttons
- g.querySelectorAll(".lco").forEach(function(b){
-  b.onclick=function(){cp(b.getAttribute("data-copy"),"Copied!");};
- });
- // bind fav
- g.querySelectorAll(".lfv").forEach(function(b){
-  b.onclick=function(){
-   var id=parseInt(b.getAttribute("data-id"));
-   D.loadouts=D.loadouts.map(function(l){return l.id==id?Object.assign({},l,{favorite:l.favorite?0:1}):l;});
-   rLoadouts();
-   rHome();
-  };
- });
-}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@media(max-width:640px){.hdr{flex-direction:column;gap:.75rem}.lg{grid-template-columns:1fr}.dt{width:100%}.db{flex:1;justify-content:center}}
+</style>
+</head>
+<body>
 
-// Tab switching
-document.querySelectorAll(".tb").forEach(function(b){
- b.onclick=function(){
-  var t=b.getAttribute("data-tab");
-  document.querySelectorAll(".tb").forEach(function(x){x.classList.remove("act");});
-  b.classList.add("act");
-  document.querySelectorAll(".tc").forEach(function(x){x.classList.remove("act");});
-  document.getElementById(t+"-tab").classList.add("act");
-  if(t=="loadouts")rLoadouts();
- };
-});
+<!-- ADMIN LOGIN MODAL -->
+<div class="al-overlay" id="alOverlay">
+  <div class="al-box">
+    <div class="al-icon">&#x1F512;</div>
+    <h3>ADMIN ACCESS</h3>
+    <p>Enter password to manage settings</p>
+    <input type="password" id="alInput" placeholder="Password..." autocomplete="off">
+    <button id="alBtn">UNLOCK</button>
+    <div class="al-err" id="alErr"></div>
+  </div>
+</div>
 
-// Search
-var si=document.getElementById("lsearch");
-if(si)si.oninput=function(){rLoadouts();};
+<header>
+<div class="hdr"><div class="logo"><div class="logo-i">S</div><div><div class="logo-t">SHXWN</div><div class="logo-s">CODM SETTINGS</div></div></div><div class="tabs"><button class="tb act" data-tab="home">Home</button><button class="tb" data-tab="loadouts">Loadouts</button><button class="tb" data-tab="manage" id="manageTab">Manage</button></div></div></header>
+<main>
+<div class="tc act" id="home-tab">
+<div class="hero"><h1>S H X W N</h1><p id="tagline"></p><div class="stats" id="stat-cards"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div><div class="st">SEND A GIFT</div><div class="ss">Support Shxwn</div></div></div><div class="sb" id="gift-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="st">FOLLOW ME</div><div class="ss">Social Media</div></div></div><div class="sb" id="social-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div><div><div class="st">SENSI &amp; HUD</div><div class="ss">Sensitivity &amp; HUD</div></div></div><div class="sb" id="sensi-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><div class="st">PERKS</div></div></div><div class="sb" id="perks-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="st">FIELD OF VIEW</div></div></div><div class="sb" id="fov-sec"></div></div><div class="sec"><div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div><div class="st">HOW TO USE</div></div></div><div class="sb" id="howto-sec"></div></div>
+</div>
+<div class="tc" id="loadouts-tab">
+<h2 style="font-size:1.875rem;font-weight:900;letter-spacing:.1em;margin-bottom:.5rem;color:var(--primary)" id="loadouts-count"></h2><div class="ls"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="lsearch" placeholder="Search weapons..."></div><div class="fc" id="filter-chips"></div><div class="lg" id="l-grid"></div>
+</div>
 
-// Init
-rHome();
-rLoadouts();
+<!-- ========== MANAGE TAB (admin only) ========== -->
+<div class="tc" id="manage-tab">
+<h2 style="font-size:1.875rem;font-weight:900;letter-spacing:.1em;margin-bottom:.25rem;color:var(--primary)">MANAGE</h2>
+<p style="font-size:.75rem;margin-bottom:1.5rem;color:var(--muted)">Admin panel — edit all settings, perks, and loadouts</p>
+
+<div class="sec" style="border-color:rgba(220,174,255,0.4)">
+<div class="sh"><div class="si"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div><div class="st">GENERAL SETTINGS</div></div></div>
+<div class="sb">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">SENSI (PHONE)</label><input id="msiP" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">SENSI (TABLET)</label><input id="msiT" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">HUD (PHONE)</label><input id="mhuP" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">HUD (TABLET)</label><input id="mhuT" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem">
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">FOV RANGE</label><input id="mfR" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">FOV FPP</label><input id="mfF" style="width:100%;padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid var(--border);color:var(--text)"></div>
+</div>
+<h4 style="font-size:.75rem;font-weight:800;letter-spacing:.15em;color:var(--primary);margin:1rem 0 .75rem">PERKS (one per line)</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+<div><label style="font-size:.625rem;font-weight:700;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.25rem">OVERKILL (WILDCARD)</label><textarea id="mpO" rows="3" style="width:100%;padding
