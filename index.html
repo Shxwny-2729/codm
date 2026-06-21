@@ -3,13 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shxwn — CODM Settings &amp; Loadouts</title>
+<title>Shxwn — CODM Settings & Loadouts</title>
 <style>
 :root{--bg:#1a0f24;--bg2:#2a1838;--card:rgba(60,35,85,0.55);--border:rgba(220,174,255,0.18);--primary:#dcaeff;--primary-dark:#b87adf;--primary-deep:#8a4fb3;--text:#f5ecff;--muted:#c9b8da;--subtle:#8a7a9c}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 20% 0%,var(--bg2) 0%,var(--bg) 60%);color:var(--text);min-height:100vh;position:relative;overflow-x:hidden}
 body::before{content:'';position:fixed;top:20vh;left:10vw;width:18rem;height:18rem;border-radius:50%;opacity:.2;filter:blur(4rem);background:var(--primary);pointer-events:none;z-index:0}
 body::after{content:'';position:fixed;top:50vh;right:0;width:24rem;height:24rem;border-radius:50%;opacity:.1;filter:blur(4rem);background:var(--primary-dark);pointer-events:none;z-index:0}
+
+/* ============ PASSWORD GATE ============ */
+.pgate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 0%,var(--bg2) 0%,var(--bg) 60%)}
+.pgate::before{content:'';position:fixed;top:20vh;left:10vw;width:18rem;height:18rem;border-radius:50%;opacity:.2;filter:blur(4rem);background:var(--primary);pointer-events:none;z-index:0}
+.pgate::after{content:'';position:fixed;top:50vh;right:0;width:24rem;height:24rem;border-radius:50%;opacity:.1;filter:blur(4rem);background:var(--primary-dark);pointer-events:none;z-index:0}
+.pbox{position:relative;z-index:1;text-align:center;padding:2.5rem;border-radius:1.5rem;background:rgba(60,35,85,0.55);border:1px solid rgba(220,174,255,0.18);backdrop-filter:blur(20px);max-width:22rem;width:90%}
+.pbox .plogo{width:4rem;height:4rem;border-radius:1rem;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:1.5rem;background:linear-gradient(135deg,#dcaeff,#8a4fb3);color:#fff;box-shadow:0 0 30px rgba(220,174,255,.3);margin-bottom:1.5rem}
+.pbox h2{font-size:1.125rem;font-weight:900;letter-spacing:.25em;color:#dcaeff;margin-bottom:.25rem}
+.pbox .psub{font-size:.625rem;letter-spacing:.2em;color:#8a7a9c;margin-bottom:2rem}
+.pbox input{width:100%;padding:.75rem 1rem;border-radius:9999px;font-size:.875rem;outline:none;background:rgba(60,35,85,0.55);border:1px solid rgba(220,174,255,0.18);color:#f5ecff;text-align:center;letter-spacing:.1em;transition:.2s;backdrop-filter:blur(10px)}
+.pbox input:focus{border-color:#dcaeff;box-shadow:0 0 20px rgba(220,174,255,.15)}
+.pbox input::placeholder{color:#8a7a9c}
+.pbox button{margin-top:1rem;width:100%;padding:.75rem;border-radius:9999px;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.2s;background:#dcaeff;color:#1a0f24;border:none;box-shadow:0 4px 20px rgba(220,174,255,.25)}
+.pbox button:hover{background:#e6c2ff}
+.pbox .perr{font-size:.75rem;margin-top:.75rem;color:#ff7a99;min-height:1.25rem}
+.pgate.hidden{display:none}
+/* =================================== */
+
 header{position:sticky;top:0;z-index:40;background:rgba(26,15,36,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .hdr{max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:.75rem}
@@ -89,10 +107,48 @@ footer{text-align:center;padding:3rem 0 1rem;font-size:.6875rem;letter-spacing:.
 svg.ic{width:14px;height:14px}
 .fg2{display:flex;gap:.5rem;flex-wrap:wrap}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(8px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 @media(max-width:640px){.hdr{flex-direction:column;gap:.75rem}.lg{grid-template-columns:1fr}.dt{width:100%}.db{flex:1;justify-content:center}}
 </style>
 </head>
 <body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div class="pgate" id="pgate">
+  <div class="pbox">
+    <div class="plogo">S</div>
+    <h2>SHXWN</h2>
+    <div class="psub">CODM SETTINGS</div>
+    <input type="password" id="pinput" placeholder="Enter password..." autofocus>
+    <button id="pbtn">UNLOCK</button>
+    <div class="perr" id="perr"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var PW='Herocoi992729**';
+  var g=document.getElementById('pgate');
+  var inp=document.getElementById('pinput');
+  var btn=document.getElementById('pbtn');
+  var err=document.getElementById('perr');
+  // Already logged in this session?
+  if(sessionStorage.getItem('_shxwn_auth')){g.classList.add('hidden');}
+  function unlock(){
+    if(inp.value===PW){
+      sessionStorage.setItem('_shxwn_auth','1');
+      g.classList.add('hidden');
+    }else{
+      err.textContent='Incorrect password';
+      inp.style.animation='shake .4s';
+      setTimeout(function(){inp.style.animation='';},400);
+    }
+  }
+  btn.addEventListener('click',unlock);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
+})();
+</script>
+<!-- ====================================== -->
+
 <header><div class="hdr"><div class="logo"><div class="logo-i">S</div><div><div class="logo-t">SHXWN</div><div class="logo-s">CODM SETTINGS</div></div></div><div class="tabs"><button class="tb act" data-tab="home">Home</button><button class="tb" data-tab="loadouts">Loadouts</button></div></div></header>
 <main>
 <div class="tc act" id="home-tab">
@@ -128,6 +184,7 @@ var CC={AR:"#dcaeff",SMG:"#ff9ee8",Shotgun:"#ffb86b",LMG:"#9aafff",Marksman:"#7e
 var dev="phone",cat="All";
 </script>
 <script src="app.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3279d41ec7804124a29acc6e692f9a2b","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3279d41ec7804124a29acc6e692f9a2b","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
