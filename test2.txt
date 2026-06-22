@@ -1,1 +1,0 @@
-Hello World! This is a test file to verify the base64 upload works correctly.
