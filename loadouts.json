@@ -7,7 +7,8 @@
       "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782125177891_krm-262.jpg",
       "description": "Marauder Suppressor, RTC Light Extended Barrel, Speed Up Kill, RTC Laser 1mW, Stippled Grip Tape",
       "code": "KRM-262-1C2A5E6A9C",
-      "isNew": false
+      "isNew": false,
+      "favorited": true
     },
     {
       "name": "Switchblade X9",
@@ -64,7 +65,8 @@
     }
   },
   "favorites": [
+    "Switchblade X9",
     "KRM-262",
-    "Switchblade X9"
+    "KRM 262"
   ]
 }
