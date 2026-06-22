@@ -1,7 +1,4 @@
 {
-  "favorites": [
-    "KRM-262"
-  ],
   "weapons": [
     {
       "name": "KRM-262",
@@ -15,9 +12,9 @@
     }
   ],
   "settings": {
-    "phoneSensi": "",
+    "phoneSensi": "7640768350752447037",
     "tabletSensi": "",
-    "phoneHud": "",
+    "phoneHud": "7651252456660857757-7651252456660857758",
     "tabletHud": "",
     "fov": [
       {
@@ -56,5 +53,8 @@
       "tiktok": "",
       "facebook": ""
     }
-  }
+  },
+  "favorites": [
+    "KRM-262"
+  ]
 }
