@@ -1,5 +1,7 @@
 {
-  "favorites": ["KRM-262"],
+  "favorites": [
+    "KRM-262"
+  ],
   "weapons": [
     {
       "name": "KRM-262",
@@ -7,7 +9,7 @@
       "rarity": "Legendary",
       "description": "Choke, RTC Light Extended Barrel, No Stock, MIP Laser 5mW, Stippled Grip Tape",
       "code": "KRM-262-1G2A4A6B9C",
-      "image": "images/krm-262-glorious-blaze.jpg",
+      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/krm-262-glorious-blaze.jpg",
       "favorited": true,
       "isNew": false
     }
@@ -18,12 +20,37 @@
     "phoneHud": "",
     "tabletHud": "",
     "fov": [
-      { "value": "100", "label": "FOV RANGE", "desc": "Best balance for awareness and target visibility" },
-      { "value": "90", "label": "FOV FPP", "desc": "For first person perspective" }
+      {
+        "value": "100",
+        "label": "FOV RANGE",
+        "desc": "Best balance for awareness and target visibility"
+      },
+      {
+        "value": "90",
+        "label": "FOV FPP",
+        "desc": "For first person perspective"
+      }
     ],
     "perks": [
-      { "title": "Overkill", "subtitle": "Wildcard Combo", "items": ["Lightweight", "Gung-Ho", "Dead Silence"] },
-      { "title": "Red Wildcard", "subtitle": "4 Perks Combo", "items": ["Lightweight", "Gung-Ho", "Dead Silence", "Dauntless"] }
+      {
+        "title": "Overkill",
+        "subtitle": "Wildcard Combo",
+        "items": [
+          "Lightweight",
+          "Gung-Ho",
+          "Dead Silence"
+        ]
+      },
+      {
+        "title": "Red Wildcard",
+        "subtitle": "4 Perks Combo",
+        "items": [
+          "Lightweight",
+          "Gung-Ho",
+          "Dead Silence",
+          "Dauntless"
+        ]
+      }
     ],
     "social": {
       "tiktok": "",
