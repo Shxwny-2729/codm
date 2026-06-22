@@ -1,15 +1,5 @@
 {
-  "weapons": [
-    {
-      "name": "KRM-262",
-      "type": "shotgun",
-      "rarity": "Legendary",
-      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/krm-262-glorious-blaze.jpg",
-      "description": "Choke, RTC Extended Light Barrel, MIP Laser 5mW, No Stock, Granulated Grip Tape",
-      "code": "KRM-262-1G2A4A6B9C",
-      "isNew": false
-    }
-  ],
+  "weapons": [],
   "settings": {
     "phoneSensi": "7640768350752447037",
     "tabletSensi": "",
