@@ -431,35 +431,19 @@ const PWD='Herocoi992729**';
 const GH_OWNER='Shxwny-2729',GH_REPO='codm',GH_BRANCH='main';
 const LOADOUTS_URL='https://raw.githubusercontent.com/'+GH_OWNER+'/'+GH_REPO+'/'+GH_BRANCH+'/loadouts.json';
 const GH_API='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/';
-const DEFAULTS={phoneSensi:'',tabletSensi:'',phoneHud:'',tabletHud:'',fov:[{value:'85',label:'FOV RANGE',desc:'Best balance for awareness and target visibility'},{value:'85',label:'FOV FPP',desc:'For first person perspective'}],perks:[{title:'Overkill',subtitle:'Wildcard Combo',items:['Lightweight','Gung-Ho','Dead Silence']},{title:'Red Wildcard',subtitle:'4 Perks Combo',items:['Lightweight','Gung-Ho','Dead Silence','Dauntless']}],social:{tiktok:'',facebook:''}};
+const DEFAULTS={phoneSensi:'',tabletSensi:'',phoneHud:'',tabletHud:'',fov:[{value:'85',label:'FOV RANGE',desc:'Best balance for awareness and target visibility'},{value:'85',label:'FOV FPP',desc:'For first person perspective'}],perks:[{title:'Overkill',subtitle:'Wildcard Combo',items:['Lightweight','Gung-Ho','Dead Silence']},{title:'Red Wildcard',subtitle:'4 Perks Combo',items:['Lightweight','Gung-Ho','Dead Silence','Dauntless']}],social:{tiktok:'https://www.tiktok.com/@syondasyip',facebook:''}};
 let weapons=[],settings=JSON.parse(JSON.stringify(DEFAULTS)),favorites=[],curFilter='all',curAttach='',unlocked=sessionStorage.getItem('shxwn_mu')==='1',uploadedImageData='',welcomeShown=sessionStorage.getItem('shxwn_welcome')==='1',remoteDataLoaded=false,isAdmin=false,ocrPendingImage=null;
 const SW=()=>localStorage.setItem('shxwn_weapons',JSON.stringify(weapons));
 const SS=()=>localStorage.setItem('shxwn_settings',JSON.stringify(settings));
 const SF=()=>localStorage.setItem('shxwn_favorites',JSON.stringify(favorites));
-function getToken(){var t;try{t=localStorage.getItem('shxwn_gh_token')}catch(e){}
-var _t=["YG93WHZ3SVU=","XT59YT17TV8=","e3RcVl97TUE=","LlpUKGhvZX4=","elISWXJhZBU="];
-for(var i=0;i<_t.length;i++){
-  var s=atob(_t[i]);
-  _t[i]="";
-  for(var j=0;j<s.length;j++)_t[i]+=String.fromCharCode(s.charCodeAt(j)^((i+1)*7));
-}
-var _token=_t.join("");
-return t||_token}
+function getToken(){return localStorage.getItem('shxwn_gh_token')||''}
 function hasToken(){return !!getToken()}
 async function loadRemoteData(){try{const r=await fetch(LOADOUTS_URL+'?cb='+Date.now());if(!r.ok)throw new Error('not found');const d=await r.json();if(d.weapons&&d.weapons.length){weapons=d.weapons;weapons.forEach(w=>{if(w.favorited&&!favorites.includes(w.name))favorites.push(w.name)})}if(d.favorites)favorites=[...new Set([...favorites,...d.favorites])];if(d.settings){const s=d.settings;if(s.phoneSensi!==undefined)settings.phoneSensi=s.phoneSensi;if(s.tabletSensi!==undefined)settings.tabletSensi=s.tabletSensi;if(s.phoneHud!==undefined)settings.phoneHud=s.phoneHud;if(s.tabletHud!==undefined)settings.tabletHud=s.tabletHud;if(s.fov)settings.fov=s.fov;if(s.perks)settings.perks=s.perks;if(s.social){if(s.social.tiktok!==undefined)settings.social.tiktok=s.social.tiktok;if(s.social.facebook!==undefined)settings.social.facebook=s.social.facebook}}remoteDataLoaded=true;SW();SS();SF()}catch(e){console.log('GitHub fetch failed, using localStorage');weapons=JSON.parse(localStorage.getItem('shxwn_weapons'))||[];settings=JSON.parse(localStorage.getItem('shxwn_settings'))||JSON.parse(JSON.stringify(DEFAULTS));remoteDataLoaded=true}favorites=JSON.parse(localStorage.getItem('shxwn_favorites'))||[]}
 function buildExportData(){return{weapons:weapons,settings:settings,favorites:favorites}}
 async function pushToGitHub(silent){silent=!!silent;if(!hasToken()){if(!silent)toast('Set GitHub token in Manage Panel first');return false}const token=getToken();const data=buildExportData();const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));try{let sha='';try{const gr=await fetch(GH_API+'loadouts.json',{headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});if(gr.ok){const gj=await gr.json();sha=gj.sha}}catch(e){}const body=JSON.stringify({message:'Update loadouts.json',content:content,branch:GH_BRANCH,sha:sha||undefined});const pr=await fetch(GH_API+'loadouts.json',{method:'PUT',headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:body});if(pr.ok){if(!silent)toast('Pushed to GitHub!')}else{const ej=await pr.json().catch(()=>({}));throw new Error(ej.message||'HTTP '+pr.status)}}catch(e){if(!silent)toast('Push failed: '+e.message);return false}return true}
 async function uploadImageToGitHub(b64,name){if(!hasToken()){return b64}const token=getToken();const fname=Date.now()+'_'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.jpg';const byteString=atob(b64.split(',')[1]||b64);const mime=b64.split(',')[0]||'';const ab=new ArrayBuffer(byteString.length);const ia=new Uint8Array(ab);for(let i=0;i<byteString.length;i++)ia[i]=byteString.charCodeAt(i);const blob=new Blob([ab],{type:'image/jpeg'});const reader=new FileReader();const uploaded=await new Promise((resolve)=>{reader.onloadend=()=>resolve(reader.result.split(',')[1]);reader.readAsDataURL(blob)});try{const body=JSON.stringify({message:'Add '+name,content:uploaded,branch:GH_BRANCH});const pr=await fetch(GH_API+'image/'+fname,{method:'PUT',headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:body});if(pr.ok){const cdnUrl='https://raw.githubusercontent.com/'+GH_OWNER+'/'+GH_REPO+'/'+GH_BRANCH+'/image/'+fname;ocrPendingImage=cdnUrl;return cdnUrl}}catch(e){console.log('Image upload failed, keeping base64')}return b64}
 function togglePerf(){const b=document.body,btn=document.getElementById('perfBtn');if(b.classList.toggle('perf')){btn.style.background='var(--c1)';btn.style.color='#fff';localStorage.setItem('shxwn_perf','1');toast('Performance ON')}else{btn.style.background='';btn.style.color='';localStorage.removeItem('shxwn_perf');toast('Performance OFF')}}
-(function(){if(localStorage.getItem('shxwn_perf')==='1'){document.body.classList.add('perf');document.getElementById('perfBtn').style.background='var(--c1)';document.getElementById('perfBtn').style.color='#fff'};if(!localStorage.getItem('shxwn_gh_token')){
-var _t=["YG93WHZ3SVU=","XT59YT17TV8=","e3RcVl97TUE=","LlpUKGhvZX4=","elISWXJhZBU="];
-for(var i=0;i<_t.length;i++){
-  var s=atob(_t[i]);
-  _t[i]="";
-  for(var j=0;j<s.length;j++)_t[i]+=String.fromCharCode(s.charCodeAt(j)^((i+1)*7));
-}
-var _token=_t.join("");
-try{localStorage.setItem('shxwn_gh_token',_token)}catch(e){}}})();
+(function(){if(localStorage.getItem('shxwn_perf')==='1'){document.body.classList.add('perf');document.getElementById('perfBtn').style.background='var(--c1)';document.getElementById('perfBtn').style.color='#fff'};})();
 function showManageLogin(){if(unlocked){openManage();return}document.getElementById('passModal').classList.add('show');document.getElementById('passInput').value='';document.getElementById('passError').classList.remove('show');document.getElementById('passInput').type='password';document.getElementById('toggleVisBtn').innerHTML='<i class="fas fa-eye"></i>';setTimeout(()=>document.getElementById('passInput').focus(),200)}
 function closePassModal(){document.getElementById('passModal').classList.remove('show')}
 function togglePassVis(){const i=document.getElementById('passInput'),b=document.getElementById('toggleVisBtn');if(i.type==='password'){i.type='text';b.innerHTML='<i class="fas fa-eye-slash"></i>'}else{i.type='password';b.innerHTML='<i class="fas fa-eye"></i>'}}
