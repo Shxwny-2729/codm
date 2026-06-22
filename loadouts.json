@@ -16,7 +16,8 @@
       "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782126936297_switchblade-x9.jpg",
       "description": "Monolithic Suppressor, MIP Extended Light Barrel, OWC Skeleton Stock, Extended Mag A, Granulated Grip Tape",
       "code": "SwitchBlade X9-1C2C4B8B9A",
-      "isNew": true
+      "isNew": true,
+      "favorited": true
     }
   ],
   "settings": {
@@ -63,6 +64,7 @@
     }
   },
   "favorites": [
-    "KRM-262"
+    "KRM-262",
+    "Switchblade X9"
   ]
 }
