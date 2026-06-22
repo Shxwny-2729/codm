@@ -1,5 +1,15 @@
 {
-  "weapons": [],
+  "weapons": [
+    {
+      "name": "KRM 262",
+      "type": "shotgun",
+      "rarity": "Legendary",
+      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782125177891_krm-262.jpg",
+      "description": "Marauder Suppressor, RTC Light Extended Barrel, Speed Up Kill, RTC Laser 1mW, Stippled Grip Tape",
+      "code": "KRM-262-1C2A5E6A9C",
+      "isNew": false
+    }
+  ],
   "settings": {
     "phoneSensi": "7640768350752447037",
     "tabletSensi": "",
