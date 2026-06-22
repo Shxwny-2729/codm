@@ -4,10 +4,19 @@
       "name": "KRM 262",
       "type": "shotgun",
       "rarity": "Legendary",
-      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782126729834_krm-262.jpg",
+      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782125177891_krm-262.jpg",
       "description": "Marauder Suppressor, RTC Light Extended Barrel, Speed Up Kill, RTC Laser 1mW, Stippled Grip Tape",
       "code": "KRM-262-1C2A5E6A9C",
       "isNew": false
+    },
+    {
+      "name": "Switchblade X9",
+      "type": "smg",
+      "rarity": "Epic",
+      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782126936297_switchblade-x9.jpg",
+      "description": "Monolithic Suppressor, MIP Extended Light Barrel, OWC Skeleton Stock, Extended Mag A, Granulated Grip Tape",
+      "code": "SwitchBlade X9-1C2C4B8B9A",
+      "isNew": true
     }
   ],
   "settings": {
