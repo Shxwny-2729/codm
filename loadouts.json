@@ -9,15 +9,6 @@
       "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/krm-262-glorious-blaze.jpg",
       "favorited": true,
       "isNew": false
-    },
-    {
-      "name": "KRM 262",
-      "type": "shotgun",
-      "rarity": "Legendary",
-      "image": "https://raw.githubusercontent.com/Shxwny-2729/codm/main/image/1782123277347_krm-262.jpg",
-      "description": "Marauder Suppressor, RTC Light Extended Barrel, RTC Laser 1mW, Stippled Grip Tape, Speed Up Kill",
-      "code": "KRM-262-1C2A5E6A9C",
-      "isNew": false
     }
   ],
   "settings": {
@@ -59,7 +50,7 @@
       }
     ],
     "social": {
-      "tiktok": "",
+      "tiktok": "https://www.tiktok.com/@syondasyip",
       "facebook": ""
     }
   },
